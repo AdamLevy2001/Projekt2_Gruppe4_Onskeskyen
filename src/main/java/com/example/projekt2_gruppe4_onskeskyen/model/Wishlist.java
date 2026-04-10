@@ -1,16 +1,16 @@
 package com.example.projekt2_gruppe4_onskeskyen.model;
 
-public class Ønskeseddel {
+public class Wishlist {
 
     int id;
 
-    String navn;
+    String name;
 
     int userID;
 
-    public Ønskeseddel(int id, String navn, int userID) {
+    public Wishlist(int id, String name, int userID) {
         this.id = id;
-        this.navn = navn;
+        this.name = name;
         this.userID = userID;
     }
 
@@ -22,12 +22,12 @@ public class Ønskeseddel {
         this.id = id;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getUserID() {
