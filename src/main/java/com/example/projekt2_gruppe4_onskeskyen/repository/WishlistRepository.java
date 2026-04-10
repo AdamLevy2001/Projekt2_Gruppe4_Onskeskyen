@@ -5,14 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @Repository
 public class WishlistRepository {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public void save(Wishlist wishlist) {
-        //String sql = "INSERT INTO wishlist (id, name, user_"
+        String sql = "INSERT INTO wishlist (name, user_id) VALUES (?, ?)";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, wishlist.getName());
+            statement.setInt(2, wishlist.getUserID());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
