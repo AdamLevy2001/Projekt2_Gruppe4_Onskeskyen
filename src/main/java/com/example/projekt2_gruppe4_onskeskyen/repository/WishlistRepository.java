@@ -13,6 +13,6 @@ public class WishlistRepository {
     DataSource dataSource;
 
     public void save(Wishlist wishlist) {
-        String sql = "INSERT INTO wishlist (id, name, user_"
+        //String sql = "INSERT INTO wishlist (id, name, user_"
     }
 }
