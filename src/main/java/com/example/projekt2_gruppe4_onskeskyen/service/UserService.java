@@ -12,7 +12,6 @@ public class UserService {
         User user = new User(0, name, email, password);
 
         UserRepository.save(user);
-
         return user;
     }
 }
