@@ -14,17 +14,17 @@ CREATE TABLE users (
 CREATE TABLE wishlist (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    user_id INT,
+    user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE wish (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
+    name VARCHAR(100) NOT NULL,
     description TEXT,
-    price DECIMAL(10,2),
+    price DECIMAL(10,2) NOT NULL,
     link VARCHAR(500),
-    wishlist_id INT,
+    wishlist_id INT NOT NULL,
     FOREIGN KEY (wishlist_id) REFERENCES wishlist(id) ON DELETE CASCADE
 );
 
