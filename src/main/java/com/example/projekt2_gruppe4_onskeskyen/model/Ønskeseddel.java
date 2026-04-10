@@ -6,12 +6,12 @@ public class Ønskeseddel {
 
     String navn;
 
-    int userID;
+    int user_ID;
 
-    public Ønskeseddel(int id, String navn, int userID) {
+    public Ønskeseddel(int id, String navn, int user_ID) {
         this.id = id;
         this.navn = navn;
-        this.userID = userID;
+        this.user_ID = user_ID;
     }
 
     public int getId() {
@@ -30,11 +30,11 @@ public class Ønskeseddel {
         this.navn = navn;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUser_ID() {
+        return user_ID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser_ID(int user_ID) {
+        this.user_ID = user_ID;
     }
 }
