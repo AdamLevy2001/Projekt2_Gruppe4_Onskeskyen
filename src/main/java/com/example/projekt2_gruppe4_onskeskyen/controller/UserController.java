@@ -3,6 +3,7 @@ package com.example.projekt2_gruppe4_onskeskyen.controller;
 import com.example.projekt2_gruppe4_onskeskyen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,18 +13,40 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("getCreateUser")
-    public String createUser(){
+    @GetMapping("/createUser")
+    public String createUserPage() {
         return "createUser";
     }
 
-    @PostMapping("/saveCreateUser")
+    @PostMapping("/createUser")
     public String postCreateUser(@RequestParam("name") String name,
                                  @RequestParam("email") String email,
-                                 @RequestParam("password") String password){
+                                 @RequestParam("password") String password,
+                                 Model model) {
+        try {
+            userService.registrerUser(name, email, password);
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "createUser";
+        }
+    }
 
-        userService.registrerUser(name, email, password);
+    @GetMapping("/login")
+    public String loginPage() {
+        return "userLogin";
+    }
 
-        return "redirect:/";
+    @PostMapping("/login")
+    public String postLogin(@RequestParam("email") String email,
+                            @RequestParam("password") String password,
+                            Model model) {
+        try {
+            userService.loginUser(email, password);
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "userLogin";
+        }
     }
 }
