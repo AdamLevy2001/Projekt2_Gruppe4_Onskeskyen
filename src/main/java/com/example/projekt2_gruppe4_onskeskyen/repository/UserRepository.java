@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
@@ -14,12 +15,12 @@ public class UserRepository {
     @Autowired
     DataSource dataSource;
 
-    public void saveCreateUserToDB(User user){
+    public void saveCreateUserToDB(User user) {
         String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
-            statement.setString(1,user.getName());
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
 
@@ -27,5 +28,29 @@ public class UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public User findUserByEmail(String email) {
+        String sql = "SELECT id, name, email, password FROM users WHERE email = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                User user = new User(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"));
+
+                return user;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
