@@ -1,7 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
-import com.example.projekt2_gruppe4_onskeskyen.model.User;
-import com.example.projekt2_gruppe4_onskeskyen.repository.UserRepository;
+import com.example.projekt2_gruppe4_onskeskyen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping("getCreateUser")
     public String createUser(){
@@ -23,9 +22,7 @@ public class UserController {
                                  @RequestParam("email") String email,
                                  @RequestParam("password") String password){
 
-        User user = new User(name, email, password);
-
-        userRepository.saveCreateUserToDB(user);
+        userService.registrerUser(name, email, password);
 
         return "redirect:/";
     }
