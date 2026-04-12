@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opret Ønskeliste</title>
+    <title>Create Wishlist</title>
     <link rel="stylesheet" href="../static/style.css" th:href="@{style.css}">
 </head>
 <body>
 <div class="container">
     <div class="form-container">
-        <h1>Opret Ønskelist</h1>
+        <h1>Create Wishlist</h1>
         <form th:action="@{/saveCreateWishlist}" method="post">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Opret navn" required>
+            <input type="text" id="name" name="name" placeholder="Create name" required>
 
             <label for="userID">UserID</label>
-            <input type="number" id="userID" name="userID" placeholder="Opret userID" required>
+            <input type="number" id="userID" name="userID" placeholder="Create userID" required>
 
-            <button type="submit">Opret Ønskeliste</button>
+            <button type="submit">Create Wishlist</button>
         </form>
     </div>
 </div>
