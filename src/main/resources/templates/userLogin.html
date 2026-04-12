@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create User</title>
+    <title>Login</title>
     <link rel="stylesheet" th:href="@{/createUserStyle.css}">
 </head>
 <body>
@@ -10,19 +10,12 @@
 
 <main>
     <div class="container">
-        <form class="form-wrapper" th:action="@{/createUser}" method="post">
-            <div class="createUserForm">
-                <h2 class="form-title">Create User</h2>
+        <form class="form-wrapper" th:action="@{/login}" method="post">
+            <div class="loginForm">
+                <h2 class="form-title">Login</h2>
                 <div th:if="${errorMessage}" class="error-message">
                     <p th:text="${errorMessage}"></p>
                 </div>
-                <div class="name-wrapper">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder=" " required>
-                        <label for="name">Name</label>
-                    </div>
-                </div>
-
                 <div class="email-wrapper">
                     <div class="form-group">
                         <input type="email" id="email" name="email" placeholder=" " required>
@@ -39,7 +32,7 @@
 
                 <div class="button-wrapper">
                     <div class="form-actions">
-                        <button type="submit" class="btn" id="btn-submit">Create</button>
+                        <button type="submit" class="btn" id="btn-submit">Login</button>
                     </div>
                 </div>
             </div>
