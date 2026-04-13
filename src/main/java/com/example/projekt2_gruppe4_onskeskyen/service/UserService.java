@@ -20,11 +20,11 @@ public class UserService {
             throw new IllegalArgumentException("Email findes allerede");
         }
 
-        if(name == null){
+        if(name == null || name.isEmpty()){
             throw new IllegalArgumentException("Navn kan ikke være tomt");
         }
 
-        if(email == null){
+        if(email == null || email.isEmpty()){
             throw new IllegalArgumentException("Email kan ikke være tomt");
         }
 
@@ -42,7 +42,7 @@ public class UserService {
     public User loginUser(String email, String password){
         User user = userRepository.findUserByEmail(email);
 
-        if(user == null){
+        if(user == null |){
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 

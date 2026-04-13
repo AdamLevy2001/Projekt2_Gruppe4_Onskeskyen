@@ -1,9 +1,9 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
-import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
-import com.example.projekt2_gruppe4_onskeskyen.repository.WishlistRepository;
+import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,20 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WishlistController {
 
     @Autowired
-    WishlistRepository wishlistRepo;
+    WishlistService wishlistService;
 
-    @GetMapping("/getCreateWishlist")
+    @GetMapping("/createWishlist")
     public String createWishlist() {
         return "createWishlist";
     }
 
-    @PostMapping("/saveCreateWishlist")
+    @PostMapping("/createWishlist")
     public String postCreateWishlist(@RequestParam("name") String name,
-                                     @RequestParam("userID") int userID) {
+                                     @RequestParam("userID") int userID,
+                                     Model model) {
 
-        Wishlist wishlist = new Wishlist(name, userID);
-        wishlistRepo.save(wishlist);
-        return "redirect:/";
-
+        try {
+            wishlistService.registrerWishlist(name, userID);
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "createUser";
+        }
     }
 }
