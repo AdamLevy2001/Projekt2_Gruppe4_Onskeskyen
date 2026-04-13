@@ -42,7 +42,11 @@ public class UserService {
     public User loginUser(String email, String password){
         User user = userRepository.findUserByEmail(email);
 
-        if(user == null |){
+        if(user == null){
+            throw new IllegalArgumentException("Email eller password er forkert");
+        }
+
+        if(email == null || email.isEmpty()){
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 
