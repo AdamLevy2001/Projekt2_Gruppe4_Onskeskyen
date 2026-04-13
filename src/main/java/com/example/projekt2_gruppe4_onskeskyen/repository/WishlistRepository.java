@@ -15,7 +15,7 @@ public class WishlistRepository {
     @Autowired
     private DataSource dataSource;
 
-    public void save(Wishlist wishlist) {
+    public void saveWishlist(Wishlist wishlist) {
         String sql = "INSERT INTO wishlist (name, user_id) VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
