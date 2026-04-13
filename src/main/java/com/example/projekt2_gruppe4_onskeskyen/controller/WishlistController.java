@@ -1,6 +1,7 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +22,15 @@ public class WishlistController {
 
     @PostMapping("/createWishlist")
     public String postCreateWishlist(@RequestParam("name") String name,
-                                     @RequestParam("userID") int userID,
-                                     Model model) {
+                                     Model model,
+                                     HttpSession session) {
 
         try {
-            wishlistService.registrerWishlist(name, userID);
+            wishlistService.registrerWishlist(name, session);
             return "redirect:/";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "createUser";
+            return "createWishlist";
         }
     }
 }
