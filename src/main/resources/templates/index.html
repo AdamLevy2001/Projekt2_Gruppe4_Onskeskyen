@@ -6,17 +6,23 @@
 </head>
 <body>
 <header>
-    <nav>
-        <a th:href="@{/}">Hjem</a>
-        <a th:href="@{/createWishlist}">Lav en ønskeseddel</a>
-        <a th:href="@{/showWishlists}">Ønskeseddler</a>
-        <a th:href="@{/login}">Login</a>
-        <a th:href="@{/createUser}">Registrer</a>
+    <nav class="navbar">
+        <h1>Ønskeskyen</h1>
+        <div class="nav-links">
+            <div th:if="${session.userId}">
+                <p th:text="'Logget ind som: ' + ${session.userName}"></p>
+                <a th:href="@{/showWishlists}">Mine Ønskesedler</a>
+                <a th:href="@{/createWishlist}">Ny Ønskeseddel</a>
+            </div>
+            <div th:if="${session.userId == null}">
+                <a th:href="@{/createUser}">Registrer</a>
+                <a th:href="@{/login}">Login</a>
+            </div>
+        </div>
     </nav>
 </header>
 
 <main>
-    <h1>Ønskeskyen</h1>
     <div th:if="${session.loggedInUser != null}">
         <h3>Profil</h3>
         <p><strong>Navn:</strong> <span th:text="${session.userName}"></span></p>
