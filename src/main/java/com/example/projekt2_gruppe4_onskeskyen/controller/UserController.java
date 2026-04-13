@@ -28,6 +28,8 @@ public class UserController {
             userService.registrerUser(name, email, password);
             return "redirect:/";
         } catch (IllegalArgumentException e) {
+            model.addAttribute("name", name);
+            model.addAttribute("email", email);
             model.addAttribute("errorMessage", e.getMessage());
             return "createUser";
         }
@@ -47,6 +49,7 @@ public class UserController {
             userService.loginUser(email, password, session);
             return "redirect:/";
         } catch (IllegalArgumentException e) {
+            model.addAttribute("email", email);
             model.addAttribute("errorMessage", e.getMessage());
             return "userLogin";
         }

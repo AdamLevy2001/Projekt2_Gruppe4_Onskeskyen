@@ -18,14 +18,14 @@
                 </div>
                 <div class="name-wrapper">
                     <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder=" " required>
+                        <input type="text" id="name" name="name" th:value="${name}" placeholder=" " required>
                         <label for="name">Name</label>
                     </div>
                 </div>
 
                 <div class="email-wrapper">
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <input type="email" id="email" name="email" th:value="${email}" placeholder=" " required>
                         <label for="email">Email</label>
                     </div>
                 </div>

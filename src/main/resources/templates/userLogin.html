@@ -18,7 +18,7 @@
                 </div>
                 <div class="email-wrapper">
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <input type="email" id="email" name="email" th:value="email" placeholder=" " required>
                         <label for="email">Email</label>
                     </div>
                 </div>
@@ -35,6 +35,8 @@
                         <button type="submit" class="btn" id="btn-submit">Login</button>
                     </div>
                 </div>
+
+                <p><a href="/createUser">Ingen bruger? Registrer her</a></p>
             </div>
         </form>
     </div>
