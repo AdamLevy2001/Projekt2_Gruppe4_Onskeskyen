@@ -21,7 +21,7 @@ public class WishController {
     @GetMapping("/wish/create")
     public String showCreateForm(Model model) {
         model.addAttribute("wish", new Wish(0, "", "", 0.0, "", 0));
-        return "create-wish";
+        return "wish-create";
     }
 
     @PostMapping("/wish/create")
@@ -32,8 +32,8 @@ public class WishController {
                 wish.getDescription(),
                 wish.getPrice(),
                 wish.getLink(),
-                wish.getWishlist_ID());
+                wish.getWishlistID());
 
-        return "redirect:/wishlist";
+        return "redirect:/";
     }
 }

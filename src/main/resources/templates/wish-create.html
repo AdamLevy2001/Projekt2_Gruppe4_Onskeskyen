@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/wish/create" method="post" th:object="${wish}">
+
+    <input type="text" th:field="*{name}" placeholder="Navn" />
+
+    <input type="text" th:field="*{description}" placeholder="Beskrivelse" />
+
+    <input type="number" step="0.01" th:field="*{price}" placeholder="Pris" />
+
+    <input type="text" th:field="*{link}" placeholder="Link" />
+
+    <input type="number" th:field="*{wishlistID}" placeholder="Wishlist ID" />
+    <button type="submit">Opret ønske</button>
+</form>
+</body>
+</html>
