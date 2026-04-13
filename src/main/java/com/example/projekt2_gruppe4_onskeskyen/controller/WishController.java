@@ -1,6 +1,5 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
-
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishService;
 import org.springframework.stereotype.Controller;
@@ -15,13 +14,13 @@ public class WishController {
     private final WishService wishService;
 
     public WishController(WishService wishService) {
-        this.wishService=wishService;
+        this.wishService = wishService;
     }
 
     @GetMapping("/wish/create")
     public String showCreateForm(Model model) {
         model.addAttribute("wish", new Wish(0, "", "", 0.0, "", 0));
-        return "wish-create";
+        return "createWish";
     }
 
     @PostMapping("/wish/create")
