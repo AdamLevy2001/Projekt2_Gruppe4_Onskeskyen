@@ -8,5 +8,11 @@
 <h1>Placeholder</h1>
 <a th:href="@{/createUser}">Create User</a>
 <a th:href="@{/login}">Login</a>
+<a th:href="@{/createWishlist}">Create Wishlist</a>
+<div class="profile-info">
+    <p><strong>Navn:</strong> <span th:text="${session.userName}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${session.email}"></span></p>
+    <p><strong>User ID:</strong> <span th:text="${session.userId}"></span></p>
+</div>
 </body>
 </html>

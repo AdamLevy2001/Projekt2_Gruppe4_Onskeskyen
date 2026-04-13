@@ -2,6 +2,7 @@ package com.example.projekt2_gruppe4_onskeskyen.service;
 
 import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,10 @@ public class UserService {
             throw new IllegalArgumentException("Email kan ikke være tomt");
         }
 
+        if(!email.contains("@")){
+            throw new IllegalArgumentException("Email skal være gyldig");
+        }
+
         if(password == null || password.length() < 8){
             throw new IllegalArgumentException("Password skal være mindst 8 tegn");
         }
@@ -39,7 +44,7 @@ public class UserService {
         userRepository.saveCreateUserToDB(user);
     }
 
-    public User loginUser(String email, String password){
+    public void loginUser(String email, String password, HttpSession session){
         User user = userRepository.findUserByEmail(email);
 
         if(user == null){
@@ -54,6 +59,9 @@ public class UserService {
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 
-        return user;
+        session.setAttribute("loggedInUser", user);
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("userName", user.getName());
     }
 }

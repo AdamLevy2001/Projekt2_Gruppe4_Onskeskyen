@@ -1,6 +1,7 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
 import com.example.projekt2_gruppe4_onskeskyen.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,9 +41,10 @@ public class UserController {
     @PostMapping("/login")
     public String postLogin(@RequestParam("email") String email,
                             @RequestParam("password") String password,
-                            Model model) {
+                            Model model,
+                            HttpSession session) {
         try {
-            userService.loginUser(email, password);
+            userService.loginUser(email, password, session);
             return "redirect:/";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
