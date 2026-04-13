@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlists</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<header>Blank</header>
+
+<main>
+    <div class="container">
+        <div th:if="${wishlists.isEmpty()}" class="empty-message">
+        <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
+    </div>
+
+    <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
+        <h3 th:text="${wishlist.name}"></h3>
+        <p th:text="'ID: ' + ${wishlist.id}"></p>
+        <hr>
+    </div>
+    </div>
+</main>
+
+<footer>Blank</footer>
+</body>
+</html>

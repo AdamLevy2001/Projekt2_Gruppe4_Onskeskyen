@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @Repository
 public class WishlistRepository {
@@ -28,5 +30,31 @@ public class WishlistRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Wishlist> findWishlistsByUserId(int userID) {
+        ArrayList<Wishlist> wishlistArrayList = new ArrayList<>();
+
+        String sql = "SELECT * FROM wishlist WHERE user_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userID);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Wishlist wishlist = new Wishlist(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("user_id")
+                );
+                wishlistArrayList.add(wishlist);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  wishlistArrayList;
     }
 }

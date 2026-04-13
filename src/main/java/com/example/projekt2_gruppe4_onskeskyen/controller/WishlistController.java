@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 
 @Controller
 public class WishlistController {
@@ -32,5 +35,20 @@ public class WishlistController {
             model.addAttribute("errorMessage", e.getMessage());
             return "createWishlist";
         }
+    }
+
+    @GetMapping("/showWishlists")
+    public String showWishlists(HttpSession session, Model model){
+        Integer userID = (Integer) session.getAttribute("userId");
+
+        if(userID == null){
+            return "redirect:/login";
+        }
+
+        ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(userID);
+
+        model.addAttribute("wishlists", wishlistArrayList);
+
+        return "showWishlists";
     }
 }
