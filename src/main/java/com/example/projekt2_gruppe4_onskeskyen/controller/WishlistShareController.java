@@ -28,6 +28,6 @@ public class WishlistShareController {
                                 @RequestParam int userId) {
         service.shareWishlist(wishlistId, userId);
 
-        return "redirect:/showWishlist";
+        return "redirect:/showWishlists";
     }
 }

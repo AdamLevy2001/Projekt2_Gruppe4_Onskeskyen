@@ -12,14 +12,14 @@
     <div class="container">
         <form class="form-wrapper" th:action="@{/createUser}" method="post">
             <div class="createUserForm">
-                <h2 class="form-title">Create User</h2>
+                <h2 class="form-title">Registrer</h2>
                 <div th:if="${errorMessage}" class="error-message">
                     <p th:text="${errorMessage}"></p>
                 </div>
                 <div class="name-wrapper">
                     <div class="form-group">
                         <input type="text" id="name" name="name" th:value="${name}" placeholder=" " required>
-                        <label for="name">Name</label>
+                        <label for="name">Navn</label>
                     </div>
                 </div>
 
@@ -33,13 +33,13 @@
                 <div class="password-wrapper">
                     <div class="form-group">
                         <input type="password" id="password" name="password" placeholder=" " required>
-                        <label for="password">Password</label>
+                        <label for="password">Adgangskode</label>
                     </div>
                 </div>
 
                 <div class="button-wrapper">
                     <div class="form-actions">
-                        <button type="submit" class="btn" id="btn-submit">Create</button>
+                        <button type="submit" class="btn" id="btn-submit">Registrer</button>
                     </div>
                 </div>
             </div>

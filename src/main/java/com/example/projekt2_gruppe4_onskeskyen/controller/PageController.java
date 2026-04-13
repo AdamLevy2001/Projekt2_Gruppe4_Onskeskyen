@@ -8,6 +8,6 @@ public class PageController {
 
     @GetMapping
     public String mainPage(){
-        return "mainPage";
+        return "index";
     }
 }
