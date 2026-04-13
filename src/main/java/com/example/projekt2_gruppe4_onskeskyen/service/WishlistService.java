@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class WishlistService {
     @Autowired
@@ -18,5 +20,9 @@ public class WishlistService {
 
         Wishlist wishlist = new Wishlist(name, (Integer) session.getAttribute("userId"));
         wishlistRepository.saveWishlist(wishlist);
+    }
+
+    public ArrayList<Wishlist> getAllWishlistByUserID(int userID){
+        return wishlistRepository.findWishlistsByUserId(userID);
     }
 }
