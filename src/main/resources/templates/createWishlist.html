@@ -10,18 +10,20 @@
 <div th:if="@{session.loggedInUser}"></div>
 <div class="container">
     <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
-        <h2 class="form-title">Opret ønskeseddel</h2>
-        <div th:if="${errorMessage}" class="error-message">
-            <p th:text="${errorMessage}"></p>
-        </div>
-        <div class="form-group">
-            <input type="text" id="name" name="name" placeholder=" " required>
-            <label for="name">Navn på ønskeseddel</label>
-        </div>
+        <div class="createWishlistForm">
+            <h2 class="form-title">Opret ønskeseddel</h2>
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+            </div>
+            <div class="form-group">
+                <input type="text" id="name" name="name" placeholder=" " required>
+                <label for="name">Navn på ønskeseddel</label>
+            </div>
 
-        <div class="button-wrapper">
-            <div class="form-actions">
-                <button type="submit" class="btn">Opret</button>
+            <div class="button-wrapper">
+                <div class="form-actions">
+                    <button type="submit" class="btn" id="btn-submit">Opret ønskeseddel</button>
+                </div>
             </div>
         </div>
     </form>
