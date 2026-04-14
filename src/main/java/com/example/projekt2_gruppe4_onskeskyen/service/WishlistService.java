@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.service;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.repository.WishlistRepository;
 import jakarta.servlet.http.HttpSession;
@@ -17,8 +18,8 @@ public class WishlistService {
         if(name == null || name.isEmpty()){
             throw new IllegalArgumentException("Navn kan ikke være tomt");
         }
-
-        Wishlist wishlist = new Wishlist(name, (Integer) session.getAttribute("userId"));
+        User user = (User) session.getAttribute("loggedInUser");
+        Wishlist wishlist = new Wishlist(name, user.getId());
         wishlistRepository.saveWishlist(wishlist);
     }
 

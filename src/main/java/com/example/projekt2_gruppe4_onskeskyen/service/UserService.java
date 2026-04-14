@@ -60,8 +60,5 @@ public class UserService {
         }
 
         session.setAttribute("loggedInUser", user);
-        session.setAttribute("email", user.getEmail());
-        session.setAttribute("userId", user.getId());
-        session.setAttribute("userName", user.getName());
     }
 }

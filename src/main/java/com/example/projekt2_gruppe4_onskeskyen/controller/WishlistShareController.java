@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistShareService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class WishlistShareController {
 
     @GetMapping("/wishlist/share")
     public String getWishlistShare(HttpSession session) {
-        Integer userID = (Integer) session.getAttribute("userId");
+        User user = (User) session.getAttribute("loggedInUser");
 
-        if(userID == null){
+        if(user == null){
             return "redirect:/login";
         }
         return "wishlistShare";

@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishService;
@@ -23,9 +24,9 @@ public class WishController {
 
     @GetMapping("/wish/create")
     public String showCreateForm(Model model, int wishlistId, HttpSession session) {
-        Integer userID = (Integer) session.getAttribute("userId");
+        User user = (User) session.getAttribute("loggedInUser");
 
-        if (userID == null) {
+        if (user == null) {
             return "redirect:/login";
         }
 

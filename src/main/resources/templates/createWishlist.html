@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{createUserStyle.css}">
 </head>
 <body>
-<div th:if="@{session.userId}"></div>
+<div th:if="@{session.loggedInUser}"></div>
 <div class="container">
     <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
         <h2 class="form-title">Opret ønskeseddel</h2>
