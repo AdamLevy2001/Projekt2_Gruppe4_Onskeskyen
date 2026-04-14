@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,19 +57,14 @@ public class UserController {
     }
     @GetMapping ("/profile")
     public String showProfile(HttpSession session, Model model) {
-        Integer userId = (Integer) session.getAttribute("userId");
-        if (userId == null) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) {
             return "redirect:/login";
         }
 
-
-        String userName = (String) session.getAttribute("userName");
-        String userEmail = (String) session.getAttribute("email");
-
-        model.addAttribute("userId", userId);
-        model.addAttribute("name", userName);
-        model.addAttribute("email", userEmail);
-
+        model.addAttribute("userId", user.getId());
+        model.addAttribute("name", user.getName());
+        model.addAttribute("email", user.getEmail());
 
         return "profile";
     }
