@@ -4,6 +4,8 @@ import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.repository.WishRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class WishService {
     private final WishRepository wishRepository;
@@ -22,5 +24,9 @@ public class WishService {
         Wish wish = new Wish(0, name, description, price, link, wishListId);
 
         wishRepository.save(wish);
+    }
+
+    public ArrayList<Wish> getWishesByWishlistId(int wishlistID) {
+        return wishRepository.findWishesByWishlistId(wishlistID);
     }
 }
