@@ -20,7 +20,12 @@ public class WishlistController {
     WishlistService wishlistService;
 
     @GetMapping("/createWishlist")
-    public String createWishlist() {
+    public String createWishlist(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if(user == null){
+            return "redirect:/login";
+        }
         return "createWishlist";
     }
 
@@ -47,9 +52,7 @@ public class WishlistController {
         }
 
         ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(userID);
-
         model.addAttribute("wishlists", wishlistArrayList);
-
         return "showWishlists";
     }
 
