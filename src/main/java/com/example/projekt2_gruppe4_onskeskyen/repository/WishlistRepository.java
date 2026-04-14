@@ -55,6 +55,21 @@ public class WishlistRepository {
             e.printStackTrace();
         }
 
-        return  wishlistArrayList;
+        return wishlistArrayList;
+    }
+
+    public void updateWishlistName(Wishlist updateWishlist) {
+        String sql = "UPDATE wishlist SET name = ? WHERE id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, updateWishlist.getName());
+            statement.setInt(2, updateWishlist.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

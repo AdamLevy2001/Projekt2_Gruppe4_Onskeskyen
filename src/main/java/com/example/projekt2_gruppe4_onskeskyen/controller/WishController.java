@@ -1,8 +1,11 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
-import com.example.projekt2_gruppe4_onskeskyen.repository.WishRepository;
+import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishService;
+import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,30 +19,41 @@ import java.util.ArrayList;
 @Controller
 public class WishController {
 
-    private final WishService wishService;
-
-
-    public WishController(WishService wishService) {
-        this.wishService = wishService;
-    }
+    @Autowired
+    WishService wishService;
 
     @GetMapping("/wish/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("wish", new Wish(0, "", "", 0.0, "", 0));
+    public String showCreateForm(Model model, @RequestParam int wishlistId, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("wishlistId", wishlistId);
         return "createWish";
     }
 
     @PostMapping("/wish/create")
-    public String createWish(@ModelAttribute Wish wish) {
+    public String createWish(@RequestParam("name") String name,
+                             @RequestParam("description") String description,
+                             @RequestParam("price") double price,
+                             @RequestParam("link") String link,
+                             @RequestParam("wishlistId") int wishlistId,
+                             Model model) {
 
-        wishService.createWish(
-                wish.getName(),
-                wish.getDescription(),
-                wish.getPrice(),
-                wish.getLink(),
-                wish.getWishlistID());
-
-        return "redirect:/";
+        try {
+            wishService.createWish(name, description, price, link, wishlistId);
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("wishlistId", wishlistId);
+            model.addAttribute("name", name);
+            model.addAttribute("description", description);
+            model.addAttribute("price", price);
+            model.addAttribute("link", link);
+            model.addAttribute("errorMessage", e.getMessage());
+            return "createWish";
+        }
     }
 
     @GetMapping("/wish/show")
