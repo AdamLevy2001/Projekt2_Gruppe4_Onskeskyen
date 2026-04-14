@@ -25,4 +25,16 @@ public class WishlistService {
     public ArrayList<Wishlist> getAllWishlistByUserID(int userID){
         return wishlistRepository.findWishlistsByUserId(userID);
     }
+
+    public void updateServiceWishlist(int id, String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name can not be empty");
+        }
+        Wishlist wishlist = new Wishlist(id, name, 0);
+        wishlistRepository.updateWishlistName(wishlist);
+    }
+
+    public Wishlist getWishlistById(int id) {
+        return wishlistRepository.getWishlistById(id);
+    }
 }
