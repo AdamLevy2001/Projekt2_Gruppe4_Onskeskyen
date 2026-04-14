@@ -54,4 +54,21 @@ public class UserController {
             return "userLogin";
         }
     }
+
+    @GetMapping("/user/delete")
+    public String getWishlistShare() {
+        return "deleteAccount";
+    }
+
+    @PostMapping("/user/delete")
+    public String deleteUser(HttpSession session) {
+
+        int userId = (int) session.getAttribute("userId");
+
+        userService.deleteUser(userId);
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
 }
