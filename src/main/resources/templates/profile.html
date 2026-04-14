@@ -6,9 +6,9 @@
 </head>
 <body>
  <h1>Min profil</h1>
-  <p>BrugerID: <span th:text="${userId}"></span></p>
-  <p>Navn: <span th:text="${name}"></span></p>
-  <p>Email: <span th:text="${email}"></span></p>
+  <p>BrugerID: <span th:text="${session.loggedInUser.id}"></span></p>
+  <p>Navn: <span th:text="${session.loggedInUser.name}"></span></p>
+  <p>Email: <span th:text="${session.loggedInUser.email}"></span></p>
 
   <a href="/">Tilbage til forsiden</a>
   <br>

@@ -61,11 +61,6 @@ public class UserController {
         if (user == null) {
             return "redirect:/login";
         }
-
-        model.addAttribute("userId", user.getId());
-        model.addAttribute("name", user.getName());
-        model.addAttribute("email", user.getEmail());
-
         return "profile";
     }
 
