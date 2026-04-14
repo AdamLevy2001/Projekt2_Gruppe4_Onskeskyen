@@ -14,6 +14,12 @@
             <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
         </div>
 
+    <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
+        <h3><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
+        <p th:text="'ID: ' + ${wishlist.id}"></p>
+        <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
+        <hr>
+    </div>
         <h1>Alle ønskesedler</h1>
         <hr>
         <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">

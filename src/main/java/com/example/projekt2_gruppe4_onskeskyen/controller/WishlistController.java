@@ -44,9 +44,12 @@ public class WishlistController {
     }
 
     @GetMapping("/showWishlists")
+    public String showWishlists(HttpSession session, Model model) {
+        Integer userID = (Integer) session.getAttribute("userId");
     public String showWishlists(HttpSession session, Model model){
         User user = (User) session.getAttribute("loggedInUser");
 
+        if (userID == null) {
         if(user == null){
             return "redirect:/login";
         }
@@ -56,5 +59,23 @@ public class WishlistController {
         model.addAttribute("wishlists", wishlistArrayList);
 
         return "showWishlists";
+    }
+
+    @GetMapping("/getUpdateWishlist")
+    public String updateWishlist(@RequestParam("id") int id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        Wishlist wishlist = wishlistService.getWishlistById(id);
+        model.addAttribute("wishlist", wishlist);
+        return "updateWishlist";
+    }
+
+    @PostMapping("/saveUpdateWishlist")
+    public String postupdateWishlist(@RequestParam("id") int id,
+                                     @RequestParam("name") String name) {
+        wishlistService.updateServiceWishlist(id, name);
+        return "redirect:/showWishlists";
     }
 }
