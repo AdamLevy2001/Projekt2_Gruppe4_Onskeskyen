@@ -55,4 +55,13 @@ public class WishController {
             return "createWish";
         }
     }
+
+    @GetMapping("/wish/show")
+    public String showWishes(@RequestParam("id") int id, Model model) {
+
+        ArrayList<Wish> wishes = wishService.getWishesByWishlistId(id);
+        model.addAttribute("wishes", wishes);
+
+        return "showWishes";
+    }
 }
