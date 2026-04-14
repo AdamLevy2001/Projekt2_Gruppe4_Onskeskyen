@@ -19,11 +19,15 @@ import java.util.ArrayList;
 @Controller
 public class WishController {
 
-    @Autowired
-    WishService wishService;
+    private final WishService wishService;
+
+
+    public WishController(WishService wishService) {
+        this.wishService = wishService;
+    }
 
     @GetMapping("/wish/create")
-    public String showCreateForm(Model model, int wishlistId, HttpSession session) {
+    public String showCreateForm(Model model, @RequestParam int wishlistId, HttpSession session) {
         User user = (User) session.getAttribute("loggedInUser");
 
         if (user == null) {
@@ -61,6 +65,7 @@ public class WishController {
 
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(id);
         model.addAttribute("wishes", wishes);
+        model.addAttribute("wishlistId", id);
 
         return "showWishes";
     }
