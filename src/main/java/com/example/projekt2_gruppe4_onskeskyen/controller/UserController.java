@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@RequestParam("email") String email,
+    public String login(@RequestParam("email") String email,
                             @RequestParam("password") String password,
                             Model model,
                             HttpSession session) {
@@ -53,5 +53,11 @@ public class UserController {
             model.addAttribute("errorMessage", e.getMessage());
             return "userLogin";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
 }

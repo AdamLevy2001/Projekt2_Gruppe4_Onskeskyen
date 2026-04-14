@@ -17,6 +17,9 @@
     <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
         <h3 th:text="${wishlist.name}"></h3>
         <p th:text="'ID: ' + ${wishlist.id}"></p>
+        <a th:href="@{/wish/create(wishlistId=${wishlist.id})}">
+            Opret ønske
+        </a>
         <hr>
     </div>
     </div>
