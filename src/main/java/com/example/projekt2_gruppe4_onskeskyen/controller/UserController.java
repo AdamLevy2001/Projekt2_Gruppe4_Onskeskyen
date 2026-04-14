@@ -54,8 +54,25 @@ public class UserController {
             return "userLogin";
         }
     }
+    @GetMapping ("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
 
-    @GetMapping("/user/delete")
+
+        String userName = (String) session.getAttribute("userName");
+        String userEmail = (String) session.getAttribute("email");
+
+        model.addAttribute("userId", userId);
+        model.addAttribute("name", userName);
+        model.addAttribute("email", userEmail);
+
+
+        return "profile";
+
+    }@GetMapping("/user/delete")
     public String getWishlistShare() {
         return "deleteAccount";
     }
