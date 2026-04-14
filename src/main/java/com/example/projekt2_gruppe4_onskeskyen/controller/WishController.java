@@ -61,6 +61,7 @@ public class WishController {
 
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(id);
         model.addAttribute("wishes", wishes);
+        model.addAttribute("wishlistId", id);
 
         return "showWishes";
     }
