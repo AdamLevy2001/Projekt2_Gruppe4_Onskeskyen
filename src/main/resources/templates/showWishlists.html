@@ -11,17 +11,16 @@
 <main>
     <div class="container">
         <div th:if="${wishlists.isEmpty()}" class="empty-message">
-        <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
-    </div>
+            <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
+        </div>
 
-    <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
-        <h3><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
-        <p th:text="'ID: ' + ${wishlist.id}"></p>
-        <a th:href="@{/wish/create(wishlistId=${wishlist.id})}">
-            Opret ønske
-        </a>
+        <h1>Alle ønskesedler</h1>
         <hr>
-    </div>
+        <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
+            <h3 th:text="${wishlist.name}"></h3>
+            <a th:href="@{/wish/show(wishlistId=${wishlist.id})}">Se ønskeseddel</a>
+            <hr>
+        </div>
     </div>
 </main>
 

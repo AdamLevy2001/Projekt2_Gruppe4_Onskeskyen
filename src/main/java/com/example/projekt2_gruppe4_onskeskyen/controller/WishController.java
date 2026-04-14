@@ -61,11 +61,9 @@ public class WishController {
     }
 
     @GetMapping("/wish/show")
-    public String showWishes(@RequestParam("id") int id, Model model) {
-
-        ArrayList<Wish> wishes = wishService.getWishesByWishlistId(id);
+    public String showWishes(@RequestParam("wishlistId") int wishlistId, Model model) {
+        ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
-        model.addAttribute("wishlistId", id);
 
         return "showWishes";
     }

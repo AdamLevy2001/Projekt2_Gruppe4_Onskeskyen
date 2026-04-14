@@ -71,8 +71,15 @@ public class UserController {
 
 
         return "profile";
+    }
 
-    }@GetMapping("/user/delete")
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/user/delete")
     public String getWishlistShare() {
         return "deleteAccount";
     }
