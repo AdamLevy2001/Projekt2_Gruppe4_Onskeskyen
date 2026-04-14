@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 
 @Repository
@@ -27,7 +25,7 @@ public class WishRepository {
             stmt.setString(2, wish.getDescription());
             stmt.setDouble(3, wish.getPrice());
             stmt.setString(4, wish.getLink());
-            stmt.setInt(5, wish.getWishlistID());
+            stmt.setInt(5, wish.getWishlistId());
 
             stmt.executeUpdate();
 
@@ -35,4 +33,31 @@ public class WishRepository {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Wish> findWishesByWishlistId(int wishlistID) {
+        ArrayList<Wish> wishes = new ArrayList<>();
+        String sql = "SELECT * FROM wish WHERE wishlist_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, wishlistID);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Wish wish = new Wish(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("link"),
+                        resultSet.getInt("wishlist_id")
+                );
+                wishes.add(wish);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wishes;
     }
+}

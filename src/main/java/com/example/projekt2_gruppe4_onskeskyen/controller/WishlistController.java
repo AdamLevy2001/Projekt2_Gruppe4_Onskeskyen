@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
@@ -19,7 +20,12 @@ public class WishlistController {
     WishlistService wishlistService;
 
     @GetMapping("/createWishlist")
-    public String createWishlist() {
+    public String createWishlist(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if(user == null){
+            return "redirect:/login";
+        }
         return "createWishlist";
     }
 
@@ -39,13 +45,13 @@ public class WishlistController {
 
     @GetMapping("/showWishlists")
     public String showWishlists(HttpSession session, Model model){
-        Integer userID = (Integer) session.getAttribute("userId");
+        User user = (User) session.getAttribute("loggedInUser");
 
-        if(userID == null){
+        if(user == null){
             return "redirect:/login";
         }
 
-        ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(userID);
+        ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(user.getId());
 
         model.addAttribute("wishlists", wishlistArrayList);
 

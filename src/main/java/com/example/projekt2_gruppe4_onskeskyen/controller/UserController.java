@@ -61,6 +61,7 @@ public class UserController {
             return "redirect:/login";
         }
 
+
         String userName = (String) session.getAttribute("userName");
         String userEmail = (String) session.getAttribute("email");
 
@@ -71,5 +72,20 @@ public class UserController {
 
         return "profile";
 
+    }@GetMapping("/user/delete")
+    public String getWishlistShare() {
+        return "deleteAccount";
+    }
+
+    @PostMapping("/user/delete")
+    public String deleteUser(HttpSession session) {
+
+        int userId = (int) session.getAttribute("userId");
+
+        userService.deleteUser(userId);
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 }
