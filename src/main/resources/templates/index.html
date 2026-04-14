@@ -13,6 +13,7 @@
                 <p th:text="'Logget ind som: ' + ${session.userName}"></p>
                 <a th:href="@{/showWishlists}">Mine Ønskesedler</a>
                 <a th:href="@{/createWishlist}">Ny Ønskeseddel</a>
+                <a th:href="@{/profile}">Min profil</a>
             </div>
             <div th:if="${session.userId == null}">
                 <a th:href="@{/createUser}">Registrer</a>
