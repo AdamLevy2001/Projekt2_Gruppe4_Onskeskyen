@@ -45,13 +45,13 @@ public class WishlistController {
 
     @GetMapping("/showWishlists")
     public String showWishlists(HttpSession session, Model model) {
-        Integer userID = (Integer) session.getAttribute("userId");
+        User user = (User) session.getAttribute("loggedInUser");
 
-        if (userID == null) {
+        if (user == null) {
             return "redirect:/login";
         }
 
-        ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(userID);
+        ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(user.getId());
         model.addAttribute("wishlists", wishlistArrayList);
         return "showWishlists";
     }

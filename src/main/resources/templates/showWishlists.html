@@ -20,13 +20,7 @@
         <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
         <hr>
     </div>
-        <h1>Alle ønskesedler</h1>
-        <hr>
-        <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
-            <h3 th:text="${wishlist.name}"></h3>
-            <a th:href="@{/wish/show(wishlistId=${wishlist.id})}">Se ønskeseddel</a>
-            <hr>
-        </div>
+
     </div>
 </main>
 

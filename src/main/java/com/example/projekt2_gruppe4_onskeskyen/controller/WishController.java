@@ -61,7 +61,7 @@ public class WishController {
     }
 
     @GetMapping("/wish/show")
-    public String showWishes(@RequestParam("wishlistId") int wishlistId, Model model) {
+    public String showWishes(@RequestParam("id") int wishlistId, Model model) {
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
 
