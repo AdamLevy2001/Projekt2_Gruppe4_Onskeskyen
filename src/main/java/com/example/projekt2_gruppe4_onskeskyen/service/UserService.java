@@ -14,26 +14,26 @@ public class UserService {
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void registrerUser(String name, String email, String password){
+    public void registrerUser(String name, String email, String password) {
         User existingUser = userRepository.findUserByEmail(email);
 
-        if(existingUser != null){
+        if (existingUser != null) {
             throw new IllegalArgumentException("Email findes allerede");
         }
 
-        if(name == null || name.isEmpty()){
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Navn kan ikke være tomt");
         }
 
-        if(email == null || email.isEmpty()){
+        if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email kan ikke være tomt");
         }
 
-        if(!email.contains("@")){
+        if (!email.contains("@")) {
             throw new IllegalArgumentException("Email skal være gyldig");
         }
 
-        if(password == null || password.length() < 8){
+        if (password == null || password.length() < 8) {
             throw new IllegalArgumentException("Password skal være mindst 8 tegn");
         }
 
@@ -44,21 +44,29 @@ public class UserService {
         userRepository.saveCreateUserToDB(user);
     }
 
-    public void loginUser(String email, String password, HttpSession session){
+    public void loginUser(String email, String password, HttpSession session) {
         User user = userRepository.findUserByEmail(email);
 
-        if(user == null){
+        if (user == null) {
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 
-        if(email == null || email.isEmpty()){
+        if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Email eller password er forkert");
         }
 
         session.setAttribute("loggedInUser", user);
+    }
+
+    public void deleteUser(int userId) {
+        if (userId <= 0) {
+            throw new IllegalArgumentException();
+        } else {
+            userRepository.deleteUserById(userId);
+        }
     }
 }

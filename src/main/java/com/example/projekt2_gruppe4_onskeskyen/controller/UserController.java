@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email,
+    public String postLogin(@RequestParam("email") String email,
                             @RequestParam("password") String password,
                             Model model,
                             HttpSession session) {
@@ -55,9 +55,20 @@ public class UserController {
         }
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session){
+    @GetMapping("/user/delete")
+    public String getWishlistShare() {
+        return "deleteAccount";
+    }
+
+    @PostMapping("/user/delete")
+    public String deleteUser(HttpSession session) {
+
+        int userId = (int) session.getAttribute("userId");
+
+        userService.deleteUser(userId);
+
         session.invalidate();
+
         return "redirect:/";
     }
 }
