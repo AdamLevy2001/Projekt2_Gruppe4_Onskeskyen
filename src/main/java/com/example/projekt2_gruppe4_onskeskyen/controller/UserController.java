@@ -77,10 +77,9 @@ public class UserController {
 
     @PostMapping("/user/delete")
     public String deleteUser(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
 
-        int userId = (int) session.getAttribute("userId");
-
-        userService.deleteUser(userId);
+        userService.deleteUser(user.getId());
 
         session.invalidate();
 
