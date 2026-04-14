@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Wishlist</title>
-    <link rel="stylesheet" th:href="@{style.css}">
+    <link rel="stylesheet" th:href="@{createUserStyle.css}">
 </head>
 <body>
+<div th:if="@{session.userId}"></div>
 <div class="container">
-    <div class="form-container">
-        <h1>Create Wishlist</h1>
-        <form th:action="@{/createWishlist}" method="post">
-            <div th:if="${errorMessage}" class="error-message">
-                <p th:text="${errorMessage}"></p>
+    <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
+        <h2 class="form-title">Opret ønskeseddel</h2>
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <div class="form-group">
+            <input type="text" id="name" name="name" placeholder=" " required>
+            <label for="name">Navn på ønskeseddel</label>
+        </div>
+
+        <div class="button-wrapper">
+            <div class="form-actions">
+                <button type="submit" class="btn">Opret</button>
             </div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Create name" required>
-
-            <!--<label for="userID">UserID</label>-->
-            <!--<input type="number" id="userID" name="userID" placeholder="Create userID" required>-->
-
-            <button type="submit">Create Wishlist</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

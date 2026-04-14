@@ -19,7 +19,12 @@ public class WishlistController {
     WishlistService wishlistService;
 
     @GetMapping("/createWishlist")
-    public String createWishlist() {
+    public String createWishlist(HttpSession session) {
+        Integer userID = (Integer) session.getAttribute("userId");
+
+        if(userID == null){
+            return "redirect:/login";
+        }
         return "createWishlist";
     }
 

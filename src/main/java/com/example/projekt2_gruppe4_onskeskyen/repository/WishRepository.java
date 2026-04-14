@@ -27,7 +27,7 @@ public class WishRepository {
             stmt.setString(2, wish.getDescription());
             stmt.setDouble(3, wish.getPrice());
             stmt.setString(4, wish.getLink());
-            stmt.setInt(5, wish.getWishlistID());
+            stmt.setInt(5, wish.getWishlistId());
 
             stmt.executeUpdate();
 
@@ -35,4 +35,4 @@ public class WishRepository {
             e.printStackTrace();
         }
     }
-    }
+}
