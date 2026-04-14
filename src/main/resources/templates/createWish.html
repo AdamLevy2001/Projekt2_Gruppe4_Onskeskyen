@@ -13,35 +13,36 @@
     <div class="container">
         <form th:action="@{/wish/create}" class="form-wrapper" method="post">
             <input type="hidden" name="wishlistId" th:value="${wishlistId}"/>
-            <div class="form-title">
-                <h2>Opret ønske</h2>
-            </div>
-            <div th:if="${errorMessage}" class="error-message">
-                <p th:text="${errorMessage}"></p>
-            </div>
-            <div class="form-group">
-                <input type="text" id="name" name="name" th:value="${name}" placeholder=" " required>
-                <label for="name">Navn på ønske</label>
-            </div>
+            <div class="createWishForm">
+                <h2 class="form-title">Opret ønske</h2>
 
-            <div class="form-group">
-                <input type="text" id="description" name="description" th:value="${description}" placeholder=" ">
-                <label for="description">Beskrivelse (frivillig)</label>
-            </div>
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" th:value="${name}" placeholder=" " required>
+                    <label for="name">Navn på ønske</label>
+                </div>
 
-            <div class="form-group">
-                <input type="number" id="price" name="price" th:value="${price}" placeholder=" " required>
-                <label for="price">Pris</label>
-            </div>
+                <div class="form-group">
+                    <input type="text" id="description" name="description" th:value="${description}" placeholder=" ">
+                    <label for="description">Beskrivelse (frivillig)</label>
+                </div>
 
-            <div class="form-group">
-                <input type="text" id="link" name="link" th:value="${link}" placeholder=" ">
-                <label for="link">Link (frivillig)</label>
-            </div>
+                <div class="form-group">
+                    <input type="number" id="price" name="price" th:value="${price}" placeholder=" " required>
+                    <label for="price">Pris</label>
+                </div>
 
-            <div class="button-wrapper">
-                <div class="form-actions">
-                    <button type="submit" class="btn" id="createWishBtn">Opret ønske</button>
+                <div class="form-group">
+                    <input type="text" id="link" name="link" th:value="${link}" placeholder=" ">
+                    <label for="link">Link (frivillig)</label>
+                </div>
+
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="createWishBtn">Opret ønske</button>
+                    </div>
                 </div>
             </div>
         </form>

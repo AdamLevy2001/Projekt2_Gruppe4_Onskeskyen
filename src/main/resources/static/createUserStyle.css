@@ -16,7 +16,7 @@
     margin: 40px auto 0;
 }
 
-.createUserForm, .loginForm {
+.createUserForm, .loginForm, .createWishForm {
     background: white;
     padding: 40px;
     border-radius: 12px;
