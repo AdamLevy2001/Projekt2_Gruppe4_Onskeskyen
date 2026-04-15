@@ -38,4 +38,9 @@ public class WishlistService {
     public Wishlist getWishlistById(int id) {
         return wishlistRepository.getWishlistById(id);
     }
+
+    public boolean isOwnerOfWish(int userId, int wishId){
+        return wishlistRepository.isOwnerOfWish(userId, wishId);
+    }
+
 }

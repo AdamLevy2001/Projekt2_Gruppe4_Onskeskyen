@@ -2,6 +2,7 @@ package com.example.projekt2_gruppe4_onskeskyen.service;
 
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.repository.WishRepository;
+import com.example.projekt2_gruppe4_onskeskyen.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 public class WishService {
     @Autowired
     WishRepository wishRepository;
+    @Autowired
+    private WishlistRepository wishlistRepository;
 
     public void createWish(String name, String description, double price, String link, int wishListId) {
         if (name == null || name.isEmpty()) {
@@ -44,5 +47,9 @@ public class WishService {
 
     public boolean isWishReserved(int wishId) {
         return wishRepository.isWishReserved(wishId);
+    }
+
+    public Wish getWishlistByWishId(int wishId){
+        return wishlistRepository.getWishlistByWishId(wishId);
     }
 }
