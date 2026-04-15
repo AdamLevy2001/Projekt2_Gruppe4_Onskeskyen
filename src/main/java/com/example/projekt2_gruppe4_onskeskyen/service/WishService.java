@@ -37,4 +37,12 @@ public class WishService {
             wishRepository.deleteWishById(wishId);
         }
     }
+
+    public void reserveWish(int userId, int wishId){
+        wishRepository.reserveWish(userId, wishId);
+    }
+
+    public boolean isWishReserved(int wishId) {
+        return wishRepository.isWishReserved(wishId);
+    }
 }
