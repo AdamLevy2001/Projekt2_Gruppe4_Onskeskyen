@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
@@ -84,5 +87,27 @@ public class UserController {
         session.invalidate();
 
         return "redirect:/";
+    }
+
+    @GetMapping("/user/search")
+    public String searchUsers(@RequestParam(required = false) String query, Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        List<User> users;
+
+        if (query == null || query.isEmpty()) {
+            users = new ArrayList<>();
+        } else {
+            users = userService.searchUsers(query, user.getId());
+        }
+
+        model.addAttribute("users", users);
+
+        return "searchUsers";
     }
 }

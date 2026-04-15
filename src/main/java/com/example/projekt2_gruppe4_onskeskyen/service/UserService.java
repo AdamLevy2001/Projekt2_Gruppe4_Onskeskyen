@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -68,5 +70,9 @@ public class UserService {
         } else {
             userRepository.deleteUserById(userId);
         }
+    }
+
+    public List<User> searchUsers(String query, int currentUserId) {
+        return userRepository.findUsersByName(query, currentUserId);
     }
 }
