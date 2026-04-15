@@ -9,7 +9,7 @@
 <header>Blank</header>
 <main>
     <div class="container">
-        <form class="form-wrapper" th:action="@{/profile/edit}" method="post">
+        <form class="form-wrapper" th:action="@{/user/profile/edit}" method="post">
             <div class="createUserForm">
                 <h2 class="form-title">Rediger profil</h2>
                 <div th:if="${errorMessage}" class="error-message">
@@ -35,7 +35,7 @@
             <div class="button-wrapper">
                 <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
             </div>
-            <p><a href="/profile">Annuller</a></p>
+            <p><a href="@{/profile}">Annuller</a></p>
             </div>
         </form>
     </div>

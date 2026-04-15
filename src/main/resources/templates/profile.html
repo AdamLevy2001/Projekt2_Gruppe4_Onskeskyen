@@ -10,8 +10,11 @@
   <p>Navn: <span th:text="${session.loggedInUser.name}"></span></p>
   <p>Email: <span th:text="${session.loggedInUser.email}"></span></p>
 
-  <a href="/">Tilbage til forsiden</a>
+
+  <a th:href="@{redirect:/}">Tilbage til forsiden</a>
   <br>
-  <a href="/showWishlists">Mine ønskelister</a>
+  <a th:href="@{/showWishlists}">Mine ønskelister</a>
+ <br>
+  <a th:href="@{/profile/edit}">Rediger profil</a>
 </body>
 </html>
