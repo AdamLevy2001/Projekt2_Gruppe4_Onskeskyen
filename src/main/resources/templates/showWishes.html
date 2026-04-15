@@ -13,10 +13,20 @@
         <p th:text="${wish.description}"></p>
         <p th:text="'Pris: ' + ${wish.price} + ' kr'"></p>
         <a th:href="${wish.link}" th:text="'Link til ønske'"></a>
+        <p><br></p>
+        <form action="/wish/delete" method="post">
+            <input type="hidden" name="wishId" th:value="${wish.id}" />
+
+            <button type="submit"
+                    onclick="return confirm('Er du sikker på at du vil slette dette ønske?')">
+                Slet ønske
+            </button>
+        </form>
         <hr>
     </li>
 </ul>
 
 <a th:href="@{/wish/create}">Tilføj Ønske</a>
+
 </body>
 </html>

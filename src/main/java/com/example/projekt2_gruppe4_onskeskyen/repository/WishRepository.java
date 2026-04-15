@@ -60,4 +60,17 @@ public class WishRepository {
         }
         return wishes;
     }
+
+    public void deleteWishById(int wishId) {
+        String sql = "DELETE FROM wish WHERE id = ?";
+
+        try (Connection conn = dataSource.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, wishId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -64,4 +64,11 @@ public class WishController {
 
         return "showWishes";
     }
+
+    @PostMapping("/wish/delete")
+   public String deleteWish(@RequestParam int wishId) {
+        wishService.deleteWish(wishId);
+
+        return "redirect:/";
+    }
 }
