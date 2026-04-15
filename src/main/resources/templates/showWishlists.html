@@ -18,6 +18,10 @@
         <h3><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
         <p th:text="'ID: ' + ${wishlist.id}"></p>
         <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
+        <form th:action="@{/deleteWishlist}" method="post">
+            <input type="hidden" name="id" th:value="${wishlist.id}">
+            <button type="submit" onclick="return confirm('Er du sikker på at du vil slette denne ønske?')">Slet</button>
+        </form>
         <hr>
     </div>
     </div>

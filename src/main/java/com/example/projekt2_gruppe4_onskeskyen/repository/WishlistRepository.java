@@ -94,4 +94,18 @@ public class WishlistRepository {
         }
         return null;
     }
+
+    public void deleteWishlist(int id) {
+        String sql = "DELETE FROM wishlist WHERE id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
