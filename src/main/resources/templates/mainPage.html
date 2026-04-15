@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<h1>Placeholder</h1>
+<a th:href="@{/createUser}">Create User</a>
+<a th:href="@{/login}">Login</a>
+<a th:href="@{/createWishlist}">Create Wishlist</a>
+<a th:href="@{/showWishlists}">Show Wishlists</a>
+<div class="profile-info">
+    <p><strong>Navn:</strong> <span th:text="${session.userName}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${session.email}"></span></p>
+    <p><strong>User ID:</strong> <span th:text="${session.userId}"></span></p>
+</div>
+</body>
+</html>
