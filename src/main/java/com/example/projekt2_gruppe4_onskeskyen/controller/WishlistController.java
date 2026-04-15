@@ -2,7 +2,9 @@ package com.example.projekt2_gruppe4_onskeskyen.controller;
 
 import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
+import com.example.projekt2_gruppe4_onskeskyen.model.WishlistShare;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
+import com.example.projekt2_gruppe4_onskeskyen.service.WishlistShareService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class WishlistController {
 
     @Autowired
     WishlistService wishlistService;
+
+    @Autowired
+    WishlistShareService wishlistShareService;
 
     @GetMapping("/createWishlist")
     public String createWishlist(HttpSession session) {
@@ -52,7 +57,10 @@ public class WishlistController {
         }
 
         ArrayList<Wishlist> wishlistArrayList = wishlistService.getAllWishlistByUserID(user.getId());
+
+        ArrayList<Wishlist> sharedWishlists = wishlistShareService.getSharedWishlists(user.getId());
         model.addAttribute("wishlists", wishlistArrayList);
+        model.addAttribute("sharedWishlists", sharedWishlists);
         return "showWishlists";
     }
 
