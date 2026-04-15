@@ -5,6 +5,7 @@ import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishService;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
+import com.example.projekt2_gruppe4_onskeskyen.service.WishlistShareService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,14 @@ import java.util.ArrayList;
 
 @Controller
 public class WishController {
+    @Autowired
+    private WishService wishService;
 
     @Autowired
-    WishService wishService;
+    private WishlistShareService wishlistShareService;
+
+    @Autowired
+    private WishlistService wishlistService;
 
     @GetMapping("/wish/create")
     public String showCreateForm(Model model, @RequestParam int wishlistId, HttpSession session) {
@@ -57,11 +63,24 @@ public class WishController {
     }
 
     @GetMapping("/wish/show")
-    public String showWishes(@RequestParam("id") int id, Model model) {
+    public String showWishes(@RequestParam("id") int wishlistId, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
 
-        ArrayList<Wish> wishes = wishService.getWishesByWishlistId(id);
+        if(user == null){
+            return "redirect:/login";
+        }
+        Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
+        boolean isOwner = user.getId() == wishlist.getUserID();
+        boolean hasAccess = isOwner || wishlistShareService.hasAccess(user.getId(), wishlistId);
+
+        if(!hasAccess){
+            return "redirect:/";
+        }
+
+        ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
-        model.addAttribute("wishlistId", id);
+        model.addAttribute("wishlistId", wishlistId);
+        model.addAttribute("isOwner", isOwner);
 
         return "showWishes";
     }

@@ -1,5 +1,6 @@
 package com.example.projekt2_gruppe4_onskeskyen.controller;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,35 @@ public class UserController {
             model.addAttribute("errorMessage", e.getMessage());
             return "userLogin";
         }
+    }
+    @GetMapping ("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        return "profile";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/user/delete")
+    public String getWishlistShare() {
+        return "deleteAccount";
+    }
+
+    @PostMapping("/user/delete")
+    public String deleteUser(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        userService.deleteUser(user.getId());
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 }

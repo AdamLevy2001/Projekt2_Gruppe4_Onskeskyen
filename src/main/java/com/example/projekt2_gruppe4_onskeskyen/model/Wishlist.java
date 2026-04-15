@@ -8,10 +8,19 @@ public class Wishlist {
 
     int userID;
 
+    String ownerName;
+
     public Wishlist(int id, String name, int userID) {
         this.id = id;
         this.name = name;
         this.userID = userID;
+    }
+
+    public Wishlist(int id, String name, int userID, String ownerName) {
+        this.id = id;
+        this.name = name;
+        this.userID = userID;
+        this.ownerName = ownerName;
     }
 
     public Wishlist(String name, int userID) {
@@ -42,5 +51,13 @@ public class Wishlist {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getOwnerName(){
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }

@@ -2,26 +2,26 @@ package com.example.projekt2_gruppe4_onskeskyen.service;
 
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.repository.WishRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class WishService {
-    private final WishRepository wishRepository;
-
-
-    public WishService(WishRepository wishRepository) {
-        this.wishRepository = wishRepository;
-    }
+    @Autowired
+    WishRepository wishRepository;
 
     public void createWish(String name, String description, double price, String link, int wishListId) {
-
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Navn mangler");
         }
 
-        Wish wish = new Wish(0, name, description, price, link, wishListId);
+        if (price < 0) {
+            throw new IllegalArgumentException("Pris kan ikke være negativ");
+        }
+
+        Wish wish = new Wish(name, description, price, link, wishListId);
 
         wishRepository.save(wish);
     }

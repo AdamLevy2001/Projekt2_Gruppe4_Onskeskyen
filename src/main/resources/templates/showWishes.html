@@ -12,11 +12,14 @@
         <strong th:text="${wish.name}"></strong>
         <p th:text="${wish.description}"></p>
         <p th:text="'Pris: ' + ${wish.price} + ' kr'"></p>
-        <a th:href="${wish.link}" th:text="'Link til ønske'"></a>
+        <div th:if="${wish.link != null && !wish.link.isEmpty()}">
+            <a th:href="${wish.link}" th:text="'Link til ønske'"></a>
+        </div>
         <hr>
     </li>
 </ul>
-
-<a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj Ønske</a>
+<div th:if="${isOwner}">
+    <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj Ønske</a>
+</div>
 </body>
 </html>

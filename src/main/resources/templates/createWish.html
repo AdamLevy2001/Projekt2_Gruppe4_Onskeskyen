@@ -1,22 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/createUserStyle.css}">
 </head>
 <body>
-<form action="/wish/create" method="post" th:object="${wish}">
+<header>
+    Blank
+</header>
+<main>
+    <div class="container">
+        <form th:action="@{/wish/create}" class="form-wrapper" method="post">
+            <input type="hidden" name="wishlistId" th:value="${wishlistId}"/>
+            <div class="createWishForm">
+                <h2 class="form-title">Opret ønske</h2>
 
-    <input type="text" th:field="*{name}" placeholder="Navn" />
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" th:value="${name}" placeholder=" " required>
+                    <label for="name">Navn på ønske</label>
+                </div>
 
-    <input type="text" th:field="*{description}" placeholder="Beskrivelse" />
+                <div class="form-group">
+                    <input type="text" id="description" name="description" th:value="${description}" placeholder=" ">
+                    <label for="description">Beskrivelse (frivillig)</label>
+                </div>
 
-    <input type="number" step="0.01" th:field="*{price}" placeholder="Pris" />
+                <div class="form-group">
+                    <input type="number" id="price" name="price" th:value="${price}" placeholder=" " required>
+                    <label for="price">Pris</label>
+                </div>
 
-    <input type="text" th:field="*{link}" placeholder="Link" />
+                <div class="form-group">
+                    <input type="text" id="link" name="link" th:value="${link}" placeholder=" ">
+                    <label for="link">Link (frivillig)</label>
+                </div>
 
-    <input type="number" th:field="*{wishlistID}" placeholder="Wishlist ID" />
-    <button type="submit">Opret ønske</button>
-</form>
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="btn-submit">Opret ønske</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer>
+    Blank
+</footer>
 </body>
 </html>

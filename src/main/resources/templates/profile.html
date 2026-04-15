@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+</head>
+<body>
+ <h1>Min profil</h1>
+  <p>BrugerID: <span th:text="${session.loggedInUser.id}"></span></p>
+  <p>Navn: <span th:text="${session.loggedInUser.name}"></span></p>
+  <p>Email: <span th:text="${session.loggedInUser.email}"></span></p>
+
+  <a href="/">Tilbage til forsiden</a>
+  <br>
+  <a href="/showWishlists">Mine ønskelister</a>
+</body>
+</html>
