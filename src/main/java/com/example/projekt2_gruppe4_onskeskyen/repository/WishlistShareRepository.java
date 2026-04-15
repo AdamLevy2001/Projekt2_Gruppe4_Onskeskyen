@@ -31,4 +31,24 @@ public class WishlistShareRepository {
 
         }
     }
+
+    public boolean hasAccess(int userId, int wishlistId){
+        String sql = "SELECT COUNT(*) FROM wishlist_share WHERE user_id = ? AND wishlist_id = ?";
+
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, userId);
+            statement.setInt(2, wishlistId);
+
+            var resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

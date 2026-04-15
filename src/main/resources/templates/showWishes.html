@@ -18,7 +18,8 @@
         <hr>
     </li>
 </ul>
-
-<a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj Ønske</a>
+<div th:if="${isOwner}">
+    <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj Ønske</a>
+</div>
 </body>
 </html>
