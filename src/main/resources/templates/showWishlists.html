@@ -18,8 +18,9 @@
 
             <div class="wishlist-list" th:if="${!wishlists.isEmpty()}">
                 <div class="wishlist-card" th:each="wishlist : ${wishlists}">
-                    <h3 class="wishlist-title" th:text="${wishlist.name}"><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
+                    <h3 class="wishlist-title" th:text="${wishlist.name}"></h3>
                     <div class="wishlist-actions">
+                        <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
                         <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
                         <form th:action="@{/deleteWishlist}" method="post">
                             <input type="hidden" name="id" th:value="${wishlist.id}">
