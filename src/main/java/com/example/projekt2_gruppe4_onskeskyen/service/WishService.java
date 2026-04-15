@@ -29,4 +29,12 @@ public class WishService {
     public ArrayList<Wish> getWishesByWishlistId(int wishlistID) {
         return wishRepository.findWishesByWishlistId(wishlistID);
     }
+
+    public void reserveWish(int userId, int wishId){
+        wishRepository.reserveWish(userId, wishId);
+    }
+
+    public boolean isWishReserved(int wishId) {
+        return wishRepository.isWishReserved(wishId);
+    }
 }

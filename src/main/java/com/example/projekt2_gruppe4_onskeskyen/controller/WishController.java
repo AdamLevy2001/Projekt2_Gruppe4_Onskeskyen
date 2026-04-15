@@ -80,8 +80,21 @@ public class WishController {
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
         model.addAttribute("wishlistId", wishlistId);
+        model.addAttribute("hasAccess", hasAccess);
         model.addAttribute("isOwner", isOwner);
 
         return "showWishes";
+    }
+
+    @PostMapping("/wish/reserve")
+    public String reserveWishes(@RequestParam int wishId, HttpSession session, Model model){
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        wishService.reserveWish(user.getId(), wishId);
+        return "redirect:/wish/show?id=" + wishId;
     }
 }

@@ -60,4 +60,35 @@ public class WishRepository {
         }
         return wishes;
     }
+
+    public void reserveWish(int userId, int wishId){
+        String sql = "INSERT INTO reservation (user_id, wish_id) VALUES (?, ?)";
+
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, userId);
+            statement.setInt(2, wishId);
+
+            statement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isWishReserved(int wishId){
+        String sql = "SELECT COUNT(*) FROM reservation WHERE wish_id = ?";
+
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, wishId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
