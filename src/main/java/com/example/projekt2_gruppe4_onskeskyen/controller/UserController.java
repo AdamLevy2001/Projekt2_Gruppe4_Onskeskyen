@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class UserController {
     @Autowired
@@ -58,7 +55,8 @@ public class UserController {
             return "userLogin";
         }
     }
-    @GetMapping ("/profile")
+
+    @GetMapping("/profile")
     public String showProfile(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         if (user == null) {
@@ -68,7 +66,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
@@ -89,25 +87,35 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/user/search")
-    public String searchUsers(@RequestParam(required = false) String query, Model model, HttpSession session) {
 
+    @GetMapping("/profile/edit")
+    public String editProfile(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
-
         if (user == null) {
             return "redirect:/login";
         }
+        model.addAttribute("user", user);
+        return "editProfile";
+    }
 
-        List<User> users;
-
-        if (query == null || query.isEmpty()) {
-            users = new ArrayList<>();
-        } else {
-            users = userService.searchUsers(query, user.getId());
+    @PostMapping("/profile/edit")
+    public String updateProfile(@RequestParam("name") String name,
+                                @RequestParam("email") String email,
+                                @RequestParam(value = "password", required = false) String password,
+                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
+                                HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) {
+            return "redirect:/login";
         }
+        try {
+            userService.updateUserProfile(user.getId(), name, email, password, confirmPassword, session);
+            return "redirect:/profile";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("user", new User(user.getId(), name, email, null));
 
-        model.addAttribute("users", users);
-
-        return "searchUsers";
+            return "editProfile";
+        }
     }
 }

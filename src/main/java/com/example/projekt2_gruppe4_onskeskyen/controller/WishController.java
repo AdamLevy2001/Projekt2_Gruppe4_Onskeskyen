@@ -5,7 +5,6 @@ import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishService;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
-import com.example.projekt2_gruppe4_onskeskyen.service.WishlistShareService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,14 +18,13 @@ import java.util.ArrayList;
 
 @Controller
 public class WishController {
-    @Autowired
-    private WishService wishService;
 
-    @Autowired
-    private WishlistShareService wishlistShareService;
+    private final WishService wishService;
 
-    @Autowired
-    private WishlistService wishlistService;
+
+    public WishController(WishService wishService) {
+        this.wishService = wishService;
+    }
 
     @GetMapping("/wish/create")
     public String showCreateForm(Model model, @RequestParam int wishlistId, HttpSession session) {
@@ -63,45 +61,10 @@ public class WishController {
     }
 
     @GetMapping("/wish/show")
-    public String showWishes(@RequestParam("id") int wishlistId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("loggedInUser");
-
-        if(user == null){
-            return "redirect:/login";
-        }
-        Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
-        boolean isOwner = user.getId() == wishlist.getUserID();
-        boolean hasAccess = isOwner || wishlistShareService.hasAccess(user.getId(), wishlistId);
-
-        if(!hasAccess){
-            return "redirect:/";
-        }
-
+    public String showWishes(@RequestParam("id") int wishlistId, Model model) {
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
-        model.addAttribute("wishlistId", wishlistId);
-        model.addAttribute("hasAccess", hasAccess);
-        model.addAttribute("isOwner", isOwner);
 
         return "showWishes";
-    }
-
-    @PostMapping("/wish/reserve")
-    public String reserveWishes(@RequestParam int wishId, HttpSession session, Model model){
-        User user = (User) session.getAttribute("loggedInUser");
-
-        if (user == null) {
-            return "redirect:/login";
-        }
-
-        wishService.reserveWish(user.getId(), wishId);
-        return "redirect:/wish/show?id=" + wishId;
-    }
-
-    @PostMapping("/wish/delete")
-   public String deleteWish(@RequestParam int wishId) {
-        wishService.deleteWish(wishId);
-
-        return "redirect:/";
     }
 }

@@ -10,45 +10,22 @@
 
 <main>
     <div class="container">
-        <section class="wishlist-section">
-            <h2>Dine ønskesedler</h2>
-            <div th:if="${wishlists.isEmpty()}" class="empty-message">
-                <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
-            </div>
+        <h1>Mine ønskesedler</h1>
 
-            <div class="wishlist-list" th:if="${!wishlists.isEmpty()}">
-                <div class="wishlist-card" th:each="wishlist : ${wishlists}">
-                    <h3 class="wishlist-title" th:text="${wishlist.name}"></h3>
-                    <div class="wishlist-actions">
-                        <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
-                        <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
-                        <form th:action="@{/deleteWishlist}" method="post">
-                            <input type="hidden" name="id" th:value="${wishlist.id}">
-                            <button type="submit" onclick="return confirm('Er du sikker på at du vil slette denne ønske?')">Slet</button>
-                        </form>
-                    </div>
-                    <hr class="divider">
-                </div>
-            </div>
-        </section>
+        <div th:if="${wishlists.isEmpty()}" class="empty-message">
+            <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
+        </div>
 
-        <section class="shared-wishlist-section">
-            <h2>Delte ønskesedler</h2>
-            <div th:if="${sharedWishlists.isEmpty()}" class="empty-message">
-                <p>Ingen delte ønskelister</p>
-            </div>
+    <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
+        <h3><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
+        <p th:text="'ID: ' + ${wishlist.id}"></p>
+        <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
+        <hr>
+    </div>
 
-            <div class="shared-wishlist-list" th:if="${!sharedWishlists.isEmpty()}">
-                <div class="shared-wishlist-card" th:each="wishlist : ${sharedWishlists}">
-                    <h3 th:text="${wishlist.name}"></h3>
-                    <p class="shared-wishlist-info">Delt af:<span th:text="${wishlist.ownerName}"></span></p>
-                    <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
-                    <hr class="divider">
-                </div>
-            </div>
-        </section>
     </div>
 </main>
+
 <footer>Blank</footer>
 </body>
 </html>
