@@ -69,4 +69,35 @@ public class UserRepository {
             e.printStackTrace();
         }
     }
+
+    public List<User> findUsersByName(String query, int currentUserId) {
+        List<User> users = new ArrayList<>();
+
+        String sql = "SELECT * FROM users WHERE name LIKE ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setString(1, "%" + query + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+
+                if (user.getId()!= currentUserId) {
+                    users.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 }
+
+

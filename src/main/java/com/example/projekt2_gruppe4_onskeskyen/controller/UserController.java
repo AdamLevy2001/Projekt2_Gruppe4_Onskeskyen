@@ -58,8 +58,7 @@ public class UserController {
             return "userLogin";
         }
     }
-
-    @GetMapping("/profile")
+    @GetMapping ("/profile")
     public String showProfile(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
         if (user == null) {
@@ -69,7 +68,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/";
     }
@@ -90,34 +89,6 @@ public class UserController {
         return "redirect:/";
     }
 
-
-    @GetMapping("/profile/edit")
-    public String editProfile(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("user", user);
-        return "editProfile";
-    }
-
-    @PostMapping("/profile/edit")
-    public String updateProfile(@RequestParam("name") String name,
-                                @RequestParam("email") String email,
-                                @RequestParam(value = "password", required = false) String password,
-                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
-                                HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        try {
-            userService.updateUserProfile(user.getId(), name, email, password, confirmPassword, session);
-            return "redirect:/profile";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("user", new User(user.getId(), name, email, null));
-
     @GetMapping("/user/search")
     public String searchUsers(@RequestParam(required = false) String query, Model model, HttpSession session) {
 
@@ -135,77 +106,8 @@ public class UserController {
             users = userService.searchUsers(query, user.getId());
         }
 
-
-    @GetMapping("/profile/edit")
-    public String editProfile(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("user", user);
-        return "editProfile";
-    }
-
-    @PostMapping("/profile/edit")
-    public String updateProfile(@RequestParam("name") String name,
-                                @RequestParam("email") String email,
-                                @RequestParam(value = "password", required = false) String password,
-                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
-                                HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        try {
-            userService.updateUserProfile(user.getId(), name, email, password, confirmPassword, session);
-            return "redirect:/profile";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("user", new User(user.getId(), name, email, null));
-
         model.addAttribute("users", users);
 
         return "searchUsers";
-    }
-}
-
-
-    @GetMapping("/profile/edit")
-    public String editProfile(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("user", user);
-        return "editProfile";
-    }
-
-    @PostMapping("/profile/edit")
-    public String updateProfile(@RequestParam("name") String name,
-                                @RequestParam("email") String email,
-                                @RequestParam(value = "password", required = false) String password,
-                                @RequestParam(value = "confirmPassword", required = false) String confirmPassword,
-                                HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        try {
-            userService.updateUserProfile(user.getId(), name, email, password, confirmPassword, session);
-            return "redirect:/profile";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("user", new User(user.getId(), name, email, null));
-
-            return "editProfile";
-        }
-    }
-}
-            return "editProfile";
-        }
-    }
-}
-            return "editProfile";
-        }
     }
 }

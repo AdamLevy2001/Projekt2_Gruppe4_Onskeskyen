@@ -71,4 +71,8 @@ public class UserService {
             userRepository.deleteUserById(userId);
         }
     }
+
+    public List<User> searchUsers(String query, int currentUserId) {
+        return userRepository.findUsersByName(query, currentUserId);
+    }
 }
