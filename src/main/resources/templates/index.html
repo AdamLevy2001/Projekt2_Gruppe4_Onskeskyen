@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Ønskeskyen</title>
     <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
+    <link rel="stylesheet" th:href="@{/BodyStyle.css}">
 </head>
 <body>
 <header>
@@ -41,6 +42,15 @@
 </header>
 
 <main>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Alle dine ønsker samlet ét sted</h1>
+            <p>Ønskeskyen gør det nemt for dig at gemme og dele alle dine ønsker med venner og familie</p>
+            <a th:if="${session.loggedInUser == null}" th:href="@{/createUser}" class="hero-btn">OPRET EN PROFIL</a>
+            <a th:if="${session.loggedInUser != null}" th:href="@{/showWishlists}" class="hero-btn">MINE ØNSKELISTER</a>
+        </div>
+    </div>
+
     <div th:if="${session.loggedInUser != null}">
         <h3>Profil</h3>
         <p><strong>Navn:</strong> <span th:text="${session.loggedInUser.name}"></span></p>
