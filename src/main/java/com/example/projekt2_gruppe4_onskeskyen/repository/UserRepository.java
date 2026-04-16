@@ -75,7 +75,7 @@ public class UserRepository {
 
         String sql = "SELECT * FROM users WHERE name LIKE ?";
         try (Connection conn = dataSource.getConnection();
-        PreparedStatement statement = conn.prepareStatement(sql)) {
+             PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setString(1, "%" + query + "%");
 
@@ -87,7 +87,7 @@ public class UserRepository {
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password")
-                        );
+                );
 
                 if (user.getId()!= currentUserId) {
                     users.add(user);
