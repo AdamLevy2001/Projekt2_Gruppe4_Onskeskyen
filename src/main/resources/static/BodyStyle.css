@@ -53,14 +53,6 @@ body {
     padding: 40px 20px;
 }
 
-.wishlist-container {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
 .wishlist-container h3 a {
     color: #00B4D8;
     text-decoration: none;
@@ -91,5 +83,59 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.page-title {
+    padding: 30px 40px 10px 40px;
+    font-size: 28px;
+    color: #222;
+}
+
+.wishlist-container {
+    margin: 10px 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wishlist-container h3 a {
+    font-size: 20px;
+    color: #00B4D8;
+}
+
+.wishlist-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.shared-wishlist {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shared-wishlist h3 {
+    color: #00B4D8;
+    font-size: 20px;
+}
+
+.shared-wishlist p {
+    color: #666;
+    font-size: 14px;
+}
+
+h2 {
+    margin: 30px 0 10px 40px;
+    font-size: 24px;
+    color: #222;
 }
 
