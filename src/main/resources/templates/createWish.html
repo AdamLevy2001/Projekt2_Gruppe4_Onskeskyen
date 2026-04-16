@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/createUserStyle.css}">
+    <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
 </head>
 <body>
 <header>
-    Blank
+    <nav class="navbar">
+        <h1>Ønskeskyen</h1>
+
+        <div class="nav-links">
+            <a th:href="@{/showWishlists}">Ønskelister</a>
+            <a th:href="@{/user/search}">Find brugere</a>
+            <a th:href="@{/profile}">Profil</a>
+            <a th:href="@{/logout}">Log ud</a>
+        </div>
+    </nav>
 </header>
 <main>
     <div class="container">
