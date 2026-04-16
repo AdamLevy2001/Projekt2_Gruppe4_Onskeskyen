@@ -9,7 +9,12 @@
 <body>
 <header>
     <nav class="navbar">
-        <h1>Ønskeskyen</h1>
+
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/Logo.png}" alt="logo">
+            </a>
+        </div>
 
         <div class="nav-links">
             <a th:href="@{/showWishlists}">Ønskelister</a>
@@ -17,9 +22,9 @@
             <a th:href="@{/profile}">Profil</a>
             <a th:href="@{/logout}">Log ud</a>
         </div>
+
     </nav>
 </header>
-
 <main>
     <div class="container">
         <form class="form-wrapper" th:action="@{/login}" method="post">
