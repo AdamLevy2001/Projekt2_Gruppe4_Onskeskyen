@@ -71,13 +71,28 @@ public class WishlistController {
             return "redirect:/login";
         }
         Wishlist wishlist = wishlistService.getWishlistById(id);
+        boolean isOwner = user.getId() == wishlist.getUserID();
+        if (!isOwner) {
+            return "redirect:/";
+        }
+
         model.addAttribute("wishlist", wishlist);
         return "updateWishlist";
     }
 
     @PostMapping("/saveUpdateWishlist")
     public String postupdateWishlist(@RequestParam("id") int id,
-                                     @RequestParam("name") String name) {
+                                     @RequestParam("name") String name, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+        Wishlist wishlist = wishlistService.getWishlistById(id);
+        boolean isOwner = user.getId() == wishlist.getUserID();
+        if (!isOwner) {
+            return "redirect:/";
+        }
         wishlistService.updateServiceWishlist(id, name);
         return "redirect:/showWishlists";
     }

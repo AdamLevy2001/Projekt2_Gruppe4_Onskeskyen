@@ -45,4 +45,9 @@ public class WishlistService {
         }
         wishlistRepository.deleteWishlist(id);
     }
+
+    public boolean isOwnerOfWish(int userId, int wishId){
+        return wishlistRepository.isOwnerOfWish(userId, wishId);
+    }
+
 }

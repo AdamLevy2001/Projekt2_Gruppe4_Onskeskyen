@@ -82,6 +82,14 @@ public class UserController {
     public String deleteUser(HttpSession session) {
         User user = (User) session.getAttribute("loggedInUser");
 
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        if (user.getId() <= 0) {
+            return "redirect:/";
+        }
+
         userService.deleteUser(user.getId());
 
         session.invalidate();

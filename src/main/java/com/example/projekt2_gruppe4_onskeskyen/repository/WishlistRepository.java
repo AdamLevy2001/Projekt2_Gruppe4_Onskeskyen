@@ -1,7 +1,9 @@
 package com.example.projekt2_gruppe4_onskeskyen.repository;
 
+import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -90,6 +92,52 @@ public class WishlistRepository {
                 );
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean isOwnerOfWish(int userId, int wishId) {
+        String sql = "SELECT COUNT(*) FROM wish JOIN wishlist ON wish.wishlist_id = wishlist.id WHERE wish.id = ? AND wishlist.user_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, wishId);
+            statement.setInt(2, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public Wish getWishlistByWishId(int wishId) {
+        String sql = "SELECT wishlist_id FROM wish WHERE wish_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, wishId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Wish(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("link"),
+                        resultSet.getInt("wishlist_id")
+                );
+            }
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return null;

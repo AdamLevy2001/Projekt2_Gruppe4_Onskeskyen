@@ -46,11 +46,22 @@ public class WishController {
                              @RequestParam("price") double price,
                              @RequestParam("link") String link,
                              @RequestParam("wishlistId") int wishlistId,
-                             Model model) {
+                             Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
+        boolean isOwner = user.getId() == wishlist.getUserID();
+        if (!isOwner) {
+            return "redirect:/";
+        }
 
         try {
             wishService.createWish(name, description, price, link, wishlistId);
-            return "redirect:/";
+            return "redirect:/wish/show?id=" + wishlistId;
         } catch (IllegalArgumentException e) {
             model.addAttribute("wishlistId", wishlistId);
             model.addAttribute("name", name);
@@ -80,15 +91,50 @@ public class WishController {
         ArrayList<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
         model.addAttribute("wishes", wishes);
         model.addAttribute("wishlistId", wishlistId);
+        model.addAttribute("hasAccess", hasAccess);
         model.addAttribute("isOwner", isOwner);
 
         return "showWishes";
     }
 
-    @PostMapping("/wish/delete")
-   public String deleteWish(@RequestParam int wishId) {
-        wishService.deleteWish(wishId);
+    @PostMapping("/wish/reserve")
+    public String reserveWishes(@RequestParam int wishId, HttpSession session){
+        User user = (User) session.getAttribute("loggedInUser");
 
-        return "redirect:/";
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        if (wishService.isWishReserved(wishId)) {
+            return "redirect:/";
+        }
+
+        if (wishlistService.isOwnerOfWish(user.getId(), wishId)) {
+            return "redirect:/";
+        }
+
+        Wish wish = wishService.getWishlistByWishId(wishId);
+
+        wishService.reserveWish(user.getId(), wishId);
+        return "redirect:/wish/show?id=" + wish.getWishlistId();
+    }
+
+    @PostMapping("/wish/delete")
+   public String deleteWish(@RequestParam int wishId, HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        if (!wishlistService.isOwnerOfWish(user.getId(), wishId)) {
+            return "redirect:/";
+        }
+
+        Wish wish = wishService.getWishlistByWishId(wishId);
+        int wishlistId = wish.getWishlistId();
+
+        wishService.deleteWish(wishId);
+        return "redirect:/wish/show?id=" + wishlistId;
     }
 }
