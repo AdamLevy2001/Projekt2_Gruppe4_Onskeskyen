@@ -32,7 +32,6 @@
 
             <!-- NOT LOGGED IN -->
             <div th:if="${session.loggedInUser == null}">
-                <a th:href="@{/createUser}">Registrer</a>
                 <a th:href="@{/login}">Login</a>
             </div>
 
@@ -49,13 +48,6 @@
             <a th:if="${session.loggedInUser == null}" th:href="@{/createUser}" class="hero-btn">OPRET EN PROFIL</a>
             <a th:if="${session.loggedInUser != null}" th:href="@{/showWishlists}" class="hero-btn">MINE ØNSKELISTER</a>
         </div>
-    </div>
-
-    <div th:if="${session.loggedInUser != null}">
-        <h3>Profil</h3>
-        <p><strong>Navn:</strong> <span th:text="${session.loggedInUser.name}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${session.loggedInUser.email}"></span></p>
-        <p><strong>User ID:</strong> <span th:text="${session.loggedInUser.id}"></span></p>
     </div>
 </main>
 
