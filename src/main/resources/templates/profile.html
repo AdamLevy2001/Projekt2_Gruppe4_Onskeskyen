@@ -4,36 +4,41 @@
     <meta charset="UTF-8">
     <title>My profile</title>
     <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/bodyStyle.css}">
 </head>
 <body>
 <header>
     <nav class="navbar">
-
         <div class="logo">
             <a th:href="@{/}">
                 <img th:src="@{/img/Logo.png}" alt="logo">
             </a>
         </div>
-
         <div class="nav-links">
             <a th:href="@{/showWishlists}">Ønskesedler</a>
             <a th:href="@{/createWishlist}">Ny ønskeseddel</a>
             <a th:href="@{/profile}">Min profil</a>
             <a th:href="@{/logout}">Log ud</a>
         </div>
-
     </nav>
 </header>
- <h1>Min profil</h1>
-  <p>BrugerID: <span th:text="${session.loggedInUser.id}"></span></p>
-  <p>Navn: <span th:text="${session.loggedInUser.name}"></span></p>
-  <p>Email: <span th:text="${session.loggedInUser.email}"></span></p>
 
+<main>
+    <div class="container">
+        <h1 class="page-title">Min profil</h1>
 
- <a th:href="@{/}">Tilbage til forsiden</a>
-  <br>
-  <a th:href="@{/showWishlists}">Mine ønskelister</a>
- <br>
-  <a th:href="@{/profile/edit}">Rediger profil</a>
+        <div class="profile-card">
+            <p><strong>BrugerID:</strong> <span th:text="${session.loggedInUser.id}"></span></p>
+            <p><strong>Navn:</strong> <span th:text="${session.loggedInUser.name}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${session.loggedInUser.email}"></span></p>
+        </div>
+
+        <div class="profile-actions">
+            <a th:href="@{/}" class="btn">Tilbage til forsiden</a>
+            <a th:href="@{/showWishlists}" class="btn">Mine ønskelister</a>
+            <a th:href="@{/profile/edit}" class="btn">Rediger profil</a>
+        </div>
+    </div>
+</main>
 </body>
 </html>
