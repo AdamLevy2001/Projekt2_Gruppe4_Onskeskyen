@@ -2,63 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mine ønsker</title>
+    <title>Rediger Ønskeliste</title>
     <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
 </head>
 <body>
 <header>
     <nav class="navbar">
-
         <div class="logo">
             <a th:href="@{/}">
                 <img th:src="@{/img/Logo.png}" alt="logo">
             </a>
         </div>
-
         <div class="nav-links">
             <a th:href="@{/showWishlists}">Ønskelister</a>
             <a th:href="@{/user/search}">Find brugere</a>
             <a th:href="@{/profile}">Profil</a>
             <a th:href="@{/logout}">Log ud</a>
         </div>
-
     </nav>
 </header>
-<h1>Ønsker</h1>
 
-<section class="wish-list">
-    <div class="wish-card" th:each="wish : ${wishes}">
-        <div class="wish-header">
-            <h2 th:text="${wish.name}"></h2>
-        </div>
+<main>
+    <h1>Rediger Ønskeliste</h1>
 
-        <div class="wish-body">
-            <p class="wish-description" th:text="${wish.description}"></p>
-            <p class="wish-price" th:text="'Pris: ' + ${wish.price} + ' kr.'"></p>
-            <div class="wish-link"
-                 th:if="${wish.link != null && !wish.link.isEmpty()}">
-                <a th:href="${wish.link}" target="_blank">Se link</a>
-            </div>
-        </div>
+    <form th:action="@{/saveUpdateWishlist}" method="post">
+        <input type="hidden" name="id" th:value="${wishlist.id}">
 
-        <div class="wish-actions">
-            <form th:if="${hasAccess && !isOwner && !@wishService.isWishReserved(wish.id)}" th:action="@{/wish/reserve}" method="post">
-                <input type="hidden" name="wishId" th:value="${wish.id}">
-                <button type="submit">Reserver ønske</button>
-            </form>
-            <div th:if="${hasAccess && !isOwner && @wishService.isWishReserved(wish.id)}">
-                <span>Reserveret</span>
-            </div>
-        </div>
+        <label for="name">Nyt navn</label>
+        <input type="text" id="name" name="name" th:value="${wishlist.name}" required>
 
-        <hr class="divider">
-
-    </div>
-</section>
-
-<div class="add-wish" th:if="${isOwner}">
-    <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj ønske</a>
-</div>
-
+        <button type="submit">Gem ændringer</button>
+        <a th:href="@{/showWishlists}">Annuller</a>
+    </form>
+</main>
 </body>
 </html>

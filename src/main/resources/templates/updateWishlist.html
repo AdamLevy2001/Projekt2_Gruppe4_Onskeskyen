@@ -8,32 +8,38 @@
 <body>
 <header>
     <nav class="navbar">
-
         <div class="logo">
             <a th:href="@{/}">
                 <img th:src="@{/img/Logo.png}" alt="logo">
             </a>
         </div>
-
         <div class="nav-links">
             <a th:href="@{/showWishlists}">Ønskelister</a>
             <a th:href="@{/user/search}">Find brugere</a>
             <a th:href="@{/profile}">Profil</a>
             <a th:href="@{/logout}">Log ud</a>
         </div>
-
     </nav>
 </header>
-    <h1>Rediger Ønskeliste</h1>
 
-    <form th:action="@{saveUpdateWishlist}" method="post">
-        <input type="hidden" name="id" th:value="${wishlist.id}">
+<main>
+    <div class="container">
+        <div class="form-card">
+            <h1 class="page-title">Rediger Ønskeliste</h1>
 
-        <label for="name">Nyt navn</label>
-        <input type="text" id="name" name="name" th:value="${wishlist.name}">
+            <form th:action="@{/saveUpdateWishlist}" method="post">
+                <input type="hidden" name="id" th:value="${wishlist.id}">
 
-        <button type="submit">Gem ændringer</button>
-    </form>
+                <div class="form-group">
+                    <label for="name">Nyt navn</label>
+                    <input type="text" id="name" name="name" th:value="${wishlist.name}" required>
+                </div>
 
+                <button type="submit" class="btn">Gem ændringer</button>
+                <a th:href="@{/showWishlists}" class="btn-cancel">Annuller</a>
+            </form>
+        </div>
+    </div>
+</main>
 </body>
 </html>
