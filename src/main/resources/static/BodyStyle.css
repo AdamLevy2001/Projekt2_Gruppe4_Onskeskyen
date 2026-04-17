@@ -10,7 +10,7 @@ body {
 }
 
 .hero {
-    background-color: #00B4D8;
+    background-color:#00B4D8;
     color: white;
     padding: 80px 60px;
     display: flex;
@@ -68,6 +68,8 @@ button, .btn {
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
+    border: none;
+    outline: none;
     cursor: pointer;
     font-size: 14px;
 }
@@ -109,7 +111,25 @@ a:hover {
 
 .wishlist-actions {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
+}
+
+.wishlist-actions a {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 20px;
+    color: #00B4D8;
+}
+
+.wishlist-actions button {
+    height: 38px;
+}
+
+.wishlist-actions form {
+    display: flex;
+    align-items: center;
 }
 
 .shared-wishlist {
