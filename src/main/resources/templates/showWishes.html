@@ -42,7 +42,8 @@
         </div>
 
         <div class="wish-actions">
-            <form th:if="${hasAccess && !isOwner && !@wishService.isWishReserved(wish.id)}" th:action="@{/wish/reserve}" method="post">
+            <form th:if="${hasAccess && !isOwner && !@wishService.isWishReserved(wish.id)}" th:action="@{/wish/reserve}"
+                  method="post">
                 <input type="hidden" name="wishId" th:value="${wish.id}">
                 <button type="submit">Reserver ønske</button>
             </form>
@@ -56,8 +57,13 @@
     </div>
 </section>
 
-<div class="add-wish" th:if="${isOwner}">
-    <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj ønske</a>
+<div class="wishlist-action" th:if="${isOwner}">
+    <div class="add-wish">
+        <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj ønske</a>
+    </div>
+    <div class="wishlist-share">
+        <a th:href="@{/wishlist/share(wishlistId=${wishlistId})}">Del din ønskeseddel</a>
+    </div>
 </div>
 
 </body>
