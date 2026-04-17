@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Wishlists</title>
     <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/BodyStyle.css}">
 </head>
 <body>
 <header>
@@ -27,7 +28,7 @@
 
 <main>
     <div class="container">
-        <h1>Mine ønskesedler</h1>
+        <h1 class="page-title">Mine ønskesedler</h1>
 
         <div th:if="${wishlists.isEmpty()}" class="empty-message">
             <p>Du har ingen ønskesedler endnu. <a href="/createWishlist">Opret en</a></p>
@@ -35,14 +36,13 @@
 
         <div th:if="${!wishlists.isEmpty()}" class="wishlist-container" th:each="wishlist : ${wishlists}">
             <h3><a th:href="@{/wish/show(id=${wishlist.id})}" th:text="${wishlist.name}"></a></h3>
-            <p th:text="'ID: ' + ${wishlist.id}"></p>
             <a th:href="@{/getUpdateWishlist(id=${wishlist.id})}">Rediger</a>
             <form th:action="@{/deleteWishlist}" method="post">
                 <input type="hidden" name="id" th:value="${wishlist.id}">
                 <button type="submit" onclick="return confirm('Er du sikker på at du vil slette denne ønske?')">Slet</button>
             </form>
-            <hr>
         </div>
+
         <h2>Delte ønskelister</h2>
 
         <div th:if="${sharedWishlists.isEmpty()}">
@@ -51,10 +51,8 @@
 
         <div th:each="wishlist : ${sharedWishlists}" class="shared-wishlist">
             <h3 th:text="${wishlist.name}"></h3>
-            <p>Delt af: <span th:text="${wishlist.ownerName}"></span>
-            </p>
+            <p>Delt af: <span th:text="${wishlist.ownerName}"></span></p>
             <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
-            <hr>
         </div>
     </div>
 </main>

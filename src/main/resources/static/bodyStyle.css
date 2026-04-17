@@ -10,7 +10,7 @@ body {
 }
 
 .hero {
-    background-color: #00B4D8;
+    background-color:#00B4D8;
     color: white;
     padding: 80px 60px;
     display: flex;
@@ -53,14 +53,6 @@ body {
     padding: 40px 20px;
 }
 
-.wishlist-container {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
 .wishlist-container h3 a {
     color: #00B4D8;
     text-decoration: none;
@@ -76,6 +68,8 @@ button, .btn {
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
+    border: none;
+    outline: none;
     cursor: pointer;
     font-size: 14px;
 }
@@ -91,5 +85,102 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.page-title {
+    padding: 30px 40px 10px 40px;
+    font-size: 28px;
+    color: #222;
+}
+
+.wishlist-container {
+    margin: 10px 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.wishlist-container h3 a {
+    font-size: 20px;
+    color: #00B4D8;
+}
+
+.wishlist-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.wishlist-actions a {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 20px;
+    color: #00B4D8;
+}
+
+.wishlist-actions button {
+    height: 38px;
+    padding: 0 20px;
+}
+
+.wishlist-actions form {
+    display: flex;
+    align-items: center;
+}
+
+.shared-wishlist {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.shared-wishlist h3 {
+    color: #00B4D8;
+    font-size: 20px;
+}
+
+.shared-wishlist p {
+    color: #666;
+    font-size: 14px;
+}
+
+h2 {
+    margin: 30px 0 10px 40px;
+    font-size: 24px;
+    color: #222;
+}
+
+.wishlist-container h3 {
+    text-align: left;
+}
+
+.wishlist-container a:not(h3 a) {
+    text-align: center;
+}
+
+.wishlist-container form {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.shared-wishlist p {
+    text-align: center;
+}
+
+.shared-wishlist a {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
