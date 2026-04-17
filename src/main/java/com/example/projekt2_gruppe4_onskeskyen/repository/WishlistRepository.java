@@ -120,7 +120,7 @@ public class WishlistRepository {
     }
 
     public Wish getWishlistByWishId(int wishId) {
-        String sql = "SELECT wishlist_id FROM wish WHERE wish_id = ?";
+        String sql = "SELECT * FROM wish WHERE id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
