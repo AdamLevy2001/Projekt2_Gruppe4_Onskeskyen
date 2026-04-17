@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Rediger Ønskeliste</title>
+    <link rel="stylesheet" th:href="@{/headerStyle.css}">
     <link rel="stylesheet" th:href="@{/formStyle.css}">
     <link rel="stylesheet" th:href="@{/headerStyle.css}">
     <link rel="stylesheet" th:href="@{/footerStyle.css}">
@@ -38,15 +39,15 @@
                     <label for="name">Nyt navn</label>
                 </div>
 
-                <div class="button-wrapper">
-                    <div class="form-actions">
-                        <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
-                    </div>
+            <div class="button-wrapper">
+                <div class="form-actions">
+                    <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
+                    <a th:href="@{/showWishlists}" class="btn-cancel">Annuller</a>
                 </div>
             </div>
-        </form>
-    </div>
-
+        </div>
+    </form>
+</div>
 </main>
 <footer>
     <div class="footer-container">
