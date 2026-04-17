@@ -1,8 +1,8 @@
 *{
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
@@ -191,7 +191,7 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr auto auto;
     align-items: center;
 }
 
@@ -224,4 +224,8 @@ h2 {
     margin: 20px 40px;
     display: flex;
     gap: 15px;
+}
+
+.wish-card > div:nth-child(2) {
+    text-align: right;
 }

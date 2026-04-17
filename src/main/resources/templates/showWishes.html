@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Mine ønsker</title>
-    <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
+    <link rel="stylesheet" th:href="@{/BodyStyle.css}">
 </head>
 <body>
 <header>
@@ -19,50 +20,38 @@
             <a th:href="@{/profile}">Min profil</a>
             <a th:href="@{/logout}">Log ud</a>
         </div>
-
     </nav>
 </header>
-<h1>Ønsker</h1>
 
-<section class="wish-list">
-    <div class="wish-card" th:each="wish : ${wishes}">
-        <div class="wish-header">
-            <h2 th:text="${wish.name}"></h2>
-        </div>
+<main>
+    <div class="container">
+        <h1 class="page-title">Ønsker</h1>
 
-        <div class="wish-body">
-            <p class="wish-description" th:text="${wish.description}"></p>
-            <p class="wish-price" th:text="'Pris: ' + ${wish.price} + ' kr.'"></p>
-            <div class="wish-link"
-                 th:if="${wish.link != null && !wish.link.isEmpty()}">
-                <a th:href="${wish.link}" target="_blank">Se link</a>
+        <div class="wish-card" th:each="wish : ${wishes}">
+            <div>
+                <h3 th:text="${wish.name}"></h3>
+                <p th:text="${wish.description}"></p>
+                <p th:text="'Pris: ' + ${wish.price} + ' kr.'"></p>
+            </div>
+            <div>
+                <a th:if="${wish.link != null && !wish.link.isEmpty()}"
+                   th:href="${wish.link}" target="_blank">Se link</a>
+            </div>
+            <div>
+                <form th:if="${hasAccess && !isOwner && !@wishService.isWishReserved(wish.id)}"
+                      th:action="@{/wish/reserve}" method="post">
+                    <input type="hidden" name="wishId" th:value="${wish.id}">
+                    <button type="submit">Reserver</button>
+                </form>
+                <span th:if="${hasAccess && !isOwner && @wishService.isWishReserved(wish.id)}">Reserveret</span>
             </div>
         </div>
 
-        <div class="wish-actions">
-            <form th:if="${hasAccess && !isOwner && !@wishService.isWishReserved(wish.id)}" th:action="@{/wish/reserve}"
-                  method="post">
-                <input type="hidden" name="wishId" th:value="${wish.id}">
-                <button type="submit">Reserver ønske</button>
-            </form>
-            <div th:if="${hasAccess && !isOwner && @wishService.isWishReserved(wish.id)}">
-                <span>Reserveret</span>
-            </div>
+        <div th:if="${isOwner}" class="profile-actions">
+            <a th:href="@{/wish/create(wishlistId=${wishlistId})}" class="btn">Tilføj ønske</a>
+            <a th:href="@{/wishlist/share(wishlistId=${wishlistId})}" class="btn">Del din ønskeseddel</a>
         </div>
-
-        <hr class="divider">
-
     </div>
-</section>
-
-<div class="wishlist-action" th:if="${isOwner}">
-    <div class="add-wish">
-        <a th:href="@{/wish/create(wishlistId=${wishlistId})}">Tilføj ønske</a>
-    </div>
-    <div class="wishlist-share">
-        <a th:href="@{/wishlist/share(wishlistId=${wishlistId})}">Del din ønskeseddel</a>
-    </div>
-</div>
-
+</main>
 </body>
 </html>
