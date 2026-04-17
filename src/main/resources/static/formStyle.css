@@ -16,7 +16,7 @@
     margin: 40px auto 0;
 }
 
-.createUserForm, .loginForm, .createWishForm, .createWishlistForm, .shareForm, .updateWishlistForm {
+.createUserForm, .loginForm, .createWishForm, .createWishlistForm, .shareForm, .updateWishlistForm, .searchUserForm {
     background: white;
     padding: 40px;
     border-radius: 12px;

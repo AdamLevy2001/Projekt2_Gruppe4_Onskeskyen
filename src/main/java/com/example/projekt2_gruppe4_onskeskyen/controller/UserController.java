@@ -98,28 +98,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/user/search")
-    public String searchUsers(@RequestParam(required = false) String query, Model model, HttpSession session) {
-
-        User user = (User) session.getAttribute("loggedInUser");
-
-        if (user == null) {
-            return "redirect:/login";
-        }
-
-        List<User> users;
-
-        if (query == null || query.isEmpty()) {
-            users = new ArrayList<>();
-        } else {
-            users = userService.searchUsers(query, user.getId());
-        }
-
-        model.addAttribute("users", users);
-
-        return "searchUsers";
-    }
-
     @GetMapping("/profile/edit")
     public String editProfile(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");

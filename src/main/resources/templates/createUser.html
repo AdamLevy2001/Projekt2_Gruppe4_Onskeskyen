@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
-    <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
-    <link rel="stylesheet" th:href="@{/createUserStyle.css}">
+    <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/formStyle.css}">
 </head>
 <body>
 <header>
@@ -17,10 +17,18 @@
         </div>
 
         <div class="nav-links">
-            <a th:href="@{/showWishlists}">Ønskelister</a>
-            <a th:href="@{/user/search}">Find brugere</a>
-            <a th:href="@{/profile}">Profil</a>
-            <a th:href="@{/logout}">Log ud</a>
+            <div th:if="${session.loggedInUser}">
+                <p th:text="'Logget ind som: ' + ${session.loggedInUser.name}"></p>
+
+                <a th:href="@{/showWishlists}">Ønskesedler</a>
+                <a th:href="@{/createWishlist}">Ny ønskeseddel</a>
+                <a th:href="@{/profile}">Min profil</a>
+                <a th:href="@{/logout}">Log ud</a>
+            </div>
+
+            <div th:if="${session.loggedInUser == null}">
+                <a th:href="@{/login}">Login</a>
+            </div>
         </div>
 
     </nav>

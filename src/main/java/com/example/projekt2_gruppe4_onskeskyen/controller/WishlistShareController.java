@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,11 +37,14 @@ public class WishlistShareController {
             return "redirect:/login";
         }
 
-        if (query != null && !query.isEmpty()) {
-            List<User> searchResults = userService.searchUsers(query, user.getId());
-            model.addAttribute("users", searchResults);
-            model.addAttribute("query", query);
+        List<User> users = new ArrayList<>();
+
+        if (query != null && !query.isBlank()) {
+            users = userService.searchUsers(query, user.getId());
         }
+
+        model.addAttribute("users", users);
+        model.addAttribute("query", query);
 
         model.addAttribute("wishlistId", wishlistId);
 
