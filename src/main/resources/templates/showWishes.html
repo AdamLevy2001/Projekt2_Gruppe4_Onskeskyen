@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Mine ønsker</title>
-    <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
-    <link rel="stylesheet" th:href="@{/BodyStyle.css}">
+    <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/bodyStyle.css}">
+    <link rel="stylesheet" th:href="@{/footerStyle.css}">
 </head>
 <body>
 <header>
@@ -53,5 +54,25 @@
         </div>
     </div>
 </main>
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <div class="footer-title">Ønskeskyen</div>
+            <div class="footer-text">Del dine ønsker nemt og hurtigt</div>
+        </div>
+
+        <div class="footer-links">
+            <a th:href="@{/showWishlists}">Ønskelister</a>
+            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+            <a th:href="@{/profile}">Profil</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Ønskeskyen
+    </div>
+</footer>
 </body>
 </html>
