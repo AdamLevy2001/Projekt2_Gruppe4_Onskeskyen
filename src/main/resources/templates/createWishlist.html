@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Wishlist</title>
     <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
+    <link rel="stylesheet" th:href="@{/createUserStyle.css}">
 </head>
 <body>
 <header>
@@ -25,7 +26,6 @@
 
     </nav>
 </header>
-<div th:if="@{session.loggedInUser}"></div>
 <div class="container">
     <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
         <div class="createWishlistForm">

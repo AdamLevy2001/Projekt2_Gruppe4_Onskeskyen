@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/HeaderStyle.css}">
+    <link rel="stylesheet" th:href="@{/createUserStyle.css}">
 </head>
 <header>
     <nav class="navbar">
@@ -24,11 +25,50 @@
     </nav>
 </header>
 <body>
-<form action="/wishlist/share" method="post">
-    <input type="number" name="wishlistId" placeholder="Wishlist ID" />
-    <input type="number" name="userId" placeholder="User ID" />
-    <button type="submit">Del ønskeseddel</button>
-</form>
+<div class="container">
+    <p>WishlistId: <span th:text="${wishlistId}"></span></p>
+    <div class="form-wrapper">
+        <div class="shareForm">
+            <form th:action="@{/wishlist/share(wishlistId=${wishlistId})}" method="get">
+                <input type="hidden" name="wishlistId" th:value="${wishlistId}">
+                <h2 class="form-title">Del din ønskeseddel</h2>
+
+                <div class="name-wrapper">
+                    <div class="form-group">
+                        <input type="text" id="query" name="query" th:value="${query}" placeholder=" "/>
+                        <label for="query">Søg efter brugernavn</label>
+                    </div>
+                </div>
+
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="btn-search">Søg</button>
+                    </div>
+                </div>
+            </form>
+            <div th:if="${users != null && !users.isEmpty()}" class="search-results">
+                <h3>Søgeresultater</h3>
+                <ul class="user-list">
+                    <li th:each="user : ${users}">
+                        <div class="user-info">
+                            <span class="user-name" th:text="${user.name}"></span>
+                            <span class="user-email" th:text="${user.email}"></span>
+                        </div>
+
+                        <form th:action="@{/wishlist/share}" method="post">
+                            <input type="hidden" name="userId" th:value="${user.id}">
+                            <input type="hidden" name="wishlistId" th:value="${wishlistId}">
+                            <button type="submit" class="btn btn-small">Del</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${query != null && (users == null || users.isEmpty())}" class="no-results">
+                <p>Ingen brugere fundet med navn: <strong th:text="${query}"></strong></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
