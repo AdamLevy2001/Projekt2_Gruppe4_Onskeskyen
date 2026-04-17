@@ -99,8 +99,8 @@ a:hover {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
 }
 
@@ -125,6 +125,7 @@ a:hover {
 
 .wishlist-actions button {
     height: 38px;
+    padding: 0 20px;
 }
 
 .wishlist-actions form {
@@ -138,8 +139,8 @@ a:hover {
     padding: 20px;
     margin: 10px 40px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
 }
 
@@ -157,5 +158,29 @@ h2 {
     margin: 30px 0 10px 40px;
     font-size: 24px;
     color: #222;
+}
+
+.wishlist-container h3 {
+    text-align: left;
+}
+
+.wishlist-container a:not(h3 a) {
+    text-align: center;
+}
+
+.wishlist-container form {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.shared-wishlist p {
+    text-align: center;
+}
+
+.shared-wishlist a {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
