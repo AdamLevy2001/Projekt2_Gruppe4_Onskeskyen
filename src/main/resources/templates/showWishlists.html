@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Wishlists</title>
     <link rel="stylesheet" th:href="@{/headerStyle.css}">
-    <link rel="stylesheet" th:href="@{/BodyStyle.css}">
+    <link rel="stylesheet" th:href="@{/bodyStyle.css}">
+    <link rel="stylesheet" th:href="@{/footerStyle.css}">
+    <link rel="stylesheet" th:href="@{globalStyle.css}">
 </head>
 <body>
 <header>
@@ -43,20 +45,39 @@
             </form>
         </div>
 
-        <h2>Delte ønskelister</h2>
+        <h2>Delte ønskesedler</h2>
 
         <div th:if="${sharedWishlists.isEmpty()}">
-            <p>Ingen delte ønskelister</p>
+            <p>Ingen delte ønskeseddler</p>
         </div>
 
         <div th:each="wishlist : ${sharedWishlists}" class="shared-wishlist">
             <h3 th:text="${wishlist.name}"></h3>
             <p>Delt af: <span th:text="${wishlist.ownerName}"></span></p>
-            <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
+            <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeseddel</a>
         </div>
     </div>
 </main>
 
-<footer>Blank</footer>
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <div class="footer-title">Ønskeskyen</div>
+            <div class="footer-text">Del dine ønsker nemt og hurtigt</div>
+        </div>
+
+        <div class="footer-links">
+            <a th:href="@{/showWishlists}">Ønskelister</a>
+            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+            <a th:href="@{/profile}">Profil</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Ønskeskyen
+    </div>
+</footer>
 </body>
 </html>

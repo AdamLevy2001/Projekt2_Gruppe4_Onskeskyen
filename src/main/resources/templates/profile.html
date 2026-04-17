@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>My profile</title>
     <link rel="stylesheet" th:href="@{/headerStyle.css}">
-    <link rel="stylesheet" th:href="@{/bodyStyle.css}">
+    <link rel="stylesheet" th:href="@{/footerStyle.css}">
+    <link rel="stylesheet" th:href="@{/globalStyle.css}">
 </head>
 <body>
 <header>
@@ -41,4 +42,25 @@
     </div>
 </main>
 </body>
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <div class="footer-title">Ønskeskyen</div>
+            <div class="footer-text">Del dine ønsker nemt og hurtigt</div>
+        </div>
+
+        <div class="footer-links">
+            <a th:href="@{/showWishlists}">Ønskelister</a>
+            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+            <a th:href="@{/profile}">Profil</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Ønskeskyen
+    </div>
+</footer>
 </html>

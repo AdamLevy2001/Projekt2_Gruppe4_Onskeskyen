@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Wishlist</title>
-    <link rel="stylesheet" th:href="@{/headerStyle.css}">
     <link rel="stylesheet" th:href="@{/formStyle.css}">
+    <link rel="stylesheet" th:href="@{/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/footerStyle.css}">
+    <link rel="stylesheet" th:href="@{/globalStyle.css}">
 </head>
 <body>
 <header>
@@ -26,25 +28,48 @@
 
     </nav>
 </header>
-<div class="container">
-    <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
-        <div class="createWishlistForm">
-            <h2 class="form-title">Opret ønskeseddel</h2>
-            <div th:if="${errorMessage}" class="error-message">
-                <p th:text="${errorMessage}"></p>
-            </div>
-            <div class="form-group">
-                <input type="text" id="name" name="name" placeholder=" " required>
-                <label for="name">Navn på ønskeseddel</label>
-            </div>
+<main>
+    <div class="container">
+        <form class="form-wrapper" th:action="@{/createWishlist}" method="post">
+            <div class="createWishlistForm">
+                <h2 class="form-title">Opret ønskeseddel</h2>
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder=" " required>
+                    <label for="name">Navn på ønskeseddel</label>
+                </div>
 
-            <div class="button-wrapper">
-                <div class="form-actions">
-                    <button type="submit" class="btn" id="btn-submit">Opret ønskeseddel</button>
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="btn-submit">Opret ønskeseddel</button>
+                    </div>
                 </div>
             </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <div class="footer-title">Ønskeskyen</div>
+            <div class="footer-text">Del dine ønsker nemt og hurtigt</div>
         </div>
-    </form>
-</div>
+
+        <div class="footer-links">
+            <a th:href="@{/showWishlists}">Ønskelister</a>
+            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+            <a th:href="@{/profile}">Profil</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Ønskeskyen
+    </div>
+</footer>
 </body>
 </html>
