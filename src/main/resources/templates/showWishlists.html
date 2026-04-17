@@ -54,7 +54,7 @@
         <div th:each="wishlist : ${sharedWishlists}" class="shared-wishlist">
             <h3 th:text="${wishlist.name}"></h3>
             <p>Delt af: <span th:text="${wishlist.ownerName}"></span></p>
-            <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeliste</a>
+            <a th:href="@{/wish/show(id=${wishlist.id})}">Se ønskeseddel</a>
         </div>
     </div>
 </main>
