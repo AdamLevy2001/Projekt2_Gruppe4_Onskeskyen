@@ -27,7 +27,7 @@ header {
 }
 
 .logo img {
-    height: 45px; /* 👈 Gør logo større */
+    height: 45px;
     transition: transform 0.3s ease;
 }
 
@@ -60,7 +60,7 @@ header {
 .nav-links a::after {
     content: "";
     position: absolute;
-    width: 0%;
+    width: 0;
     height: 2px;
     bottom: -5px;
     left: 0;

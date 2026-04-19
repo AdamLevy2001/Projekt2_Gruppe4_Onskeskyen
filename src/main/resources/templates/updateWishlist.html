@@ -39,15 +39,15 @@
                     <label for="name">Nyt navn</label>
                 </div>
 
-            <div class="button-wrapper">
-                <div class="form-actions">
-                    <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
-                    <a th:href="@{/showWishlists}" class="btn-cancel">Annuller</a>
+                <div class="button-wrapper">
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
+                        <a th:href="@{/showWishlists}" class="btn-cancel">Annuller</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </main>
 <footer>
     <div class="footer-container">
@@ -58,9 +58,11 @@
         </div>
 
         <div class="footer-links">
-            <a th:href="@{/showWishlists}">Ønskelister</a>
-            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
-            <a th:href="@{/profile}">Profil</a>
+            <div th:if="${session.loggedInUser != null}">
+                <a th:href="@{/showWishlists}">Ønskelister</a>
+                <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+                <a th:href="@{/profile}">Profil</a>
+            </div>
         </div>
 
     </div>

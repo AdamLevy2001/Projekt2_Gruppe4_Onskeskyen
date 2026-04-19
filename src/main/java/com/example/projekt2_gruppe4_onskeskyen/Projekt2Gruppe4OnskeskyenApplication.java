@@ -8,6 +8,7 @@ public class Projekt2Gruppe4OnskeskyenApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Projekt2Gruppe4OnskeskyenApplication.class, args);
+
     }
 
 }

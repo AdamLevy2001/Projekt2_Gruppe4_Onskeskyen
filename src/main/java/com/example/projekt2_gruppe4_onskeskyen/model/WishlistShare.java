@@ -5,8 +5,6 @@ public class WishlistShare {
     private int wishlistId;
     private int userId;
 
-    public WishlistShare(){}
-
     public WishlistShare(int id, int wishlistId, int userId) {
         this.id=id;
         this.wishlistId=wishlistId;
@@ -19,10 +17,6 @@ public class WishlistShare {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getWishlistId() {
-        return wishlistId;
     }
 
     public void setWishlistId(int wishlistId) {

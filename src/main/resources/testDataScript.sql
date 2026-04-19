@@ -4,7 +4,7 @@ INSERT INTO users (name, email, password)
 VALUES ('Ole Hansen', 'ole@example.com', '$2a$10$kYPvhiQL3r1Qiq3gfkJXpeNAv4PTZWniyvSNsGeLAMgkm7v86MhiS'),
        ('Anna Jensen', 'anna@example.com', '$2a$10$Bhf2lXF703d44tOD14Al4eQKgcbn.wAbD.eyxkZFPTGTx3FJJj.fy'),
        ('Per Larsen', 'per@example.com', '$2a$10$/XDfj6ZHpaXklHjmxgYGo.hsbHqC8Rv0JyjSoK3bRD.14sR7C3iim'),
-       ('Sofie Andersen', 'sofie@example.com', '$2a$10$G7sq9aBtVTgFCMP.PrYux.Wb7ib0/4wDP2k5od/3BYhkeWM2OjzOq');
+       ('Sofie Andersen', 'sofie@example.com', '$2a$10$umclHnOovtbHwmvoNFjkpOobzFw0DsvOEeT2h1kZz3tp3hotqRdcm');
 
 -- WISHLISTS
 -- Ole: 2 wishlists (Fødselsdag, Jul)
@@ -118,7 +118,7 @@ VALUES ('Kuffert', 'Letvægt hardcase kuffert 65L', 1399.00,
         'https://www.elefun.dk/vare-68753/kamera-gopro-hero13-black?gad_source=1', 8),
        ('Solcreme SPF 50', 'Høj UV-beskyttelse', 149.99, NULL, 8);
 
--- ===== RESERVATIONS =====
+-- RESERVATIONS
 -- Anna har reserveret 2 af Oles ønsker
 INSERT INTO reservation (user_id, wish_id)
 VALUES (2, 1), -- Anna reserverede Oles fodbold
@@ -142,8 +142,7 @@ INSERT INTO reservation (user_id, wish_id)
 VALUES (3, 22); -- Per reserverede Sofie's AirPods Pro
 
 
--- ===== WISHLIST_SHARE =====
-
+-- WISHLIST_SHARE
 -- Ole deler sine lister
 -- Ole's "Fødselsdag 2024" (wishlist_id=1) deles med Anna, Per og Sofie
 INSERT INTO wishlist_share (user_id, wishlist_id)
@@ -191,7 +190,7 @@ INSERT INTO wishlist_share (user_id, wishlist_id)
 VALUES (2, 8), -- Anna kan se Sofie's feriegadgets
        (3, 8); -- Per kan se Sofie's feriegadgets
 
--- ===== OVERSIGT =====
+-- OVERSIGT
 -- Ole's lister:
 --   Fødselsdag 2024 → delt med: Anna, Per, Sofie
 --   Jul 2024 → delt med: Anna, Sofie

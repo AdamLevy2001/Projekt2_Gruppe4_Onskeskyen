@@ -53,9 +53,11 @@
         </div>
 
         <div class="footer-links">
-            <a th:href="@{/showWishlists}">Ønskelister</a>
-            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
-            <a th:href="@{/profile}">Profil</a>
+            <div th:if="${session.loggedInUser != null}">
+                <a th:href="@{/showWishlists}">Ønskelister</a>
+                <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+                <a th:href="@{/profile}">Profil</a>
+            </div>
         </div>
 
     </div>

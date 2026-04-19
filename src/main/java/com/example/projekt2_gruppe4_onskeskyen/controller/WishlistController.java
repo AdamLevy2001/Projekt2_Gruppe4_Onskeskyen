@@ -2,7 +2,6 @@ package com.example.projekt2_gruppe4_onskeskyen.controller;
 
 import com.example.projekt2_gruppe4_onskeskyen.model.User;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
-import com.example.projekt2_gruppe4_onskeskyen.model.WishlistShare;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistService;
 import com.example.projekt2_gruppe4_onskeskyen.service.WishlistShareService;
 import jakarta.servlet.http.HttpSession;

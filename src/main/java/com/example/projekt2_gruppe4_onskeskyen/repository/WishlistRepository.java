@@ -3,7 +3,6 @@ package com.example.projekt2_gruppe4_onskeskyen.repository;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wish;
 import com.example.projekt2_gruppe4_onskeskyen.model.Wishlist;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;

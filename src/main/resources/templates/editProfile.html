@@ -35,26 +35,26 @@
                     <p th:text="${errorMessage}"></p>
                 </div>
 
-            <div class="form-group">
-                <input type="text" id="name" name="name" th:value="${user.name}" placeholder=" " required>
-                <label for="name">Navn</label>
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" name="email" th:value="${user.email}" placeholder=" " required>
-                <label for="email">Email</label>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder=" ">
-                <label for="password">Ny adgangskode - må stå tom</label>
-            </div>
-            <div class="form-group">
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" ">
-                 <label for="confirmPassword">Bekræft ny adgangskode</label>
-            </div>
-            <div class="button-wrapper">
-                <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
-            </div>
-            <p><a th:href="@{/profile}">Annuller</a></p>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" th:value="${user.name}" placeholder=" " required>
+                    <label for="name">Navn</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" th:value="${user.email}" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder=" ">
+                    <label for="password">Ny adgangskode - må stå tom</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" ">
+                    <label for="confirmPassword">Bekræft ny adgangskode</label>
+                </div>
+                <div class="button-wrapper">
+                    <button type="submit" class="btn" id="btn-submit">Gem ændringer</button>
+                </div>
+                <p><a th:href="@{/profile}">Annuller</a></p>
             </div>
         </form>
     </div>
@@ -68,9 +68,11 @@
         </div>
 
         <div class="footer-links">
-            <a th:href="@{/showWishlists}">Ønskelister</a>
-            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
-            <a th:href="@{/profile}">Profil</a>
+            <div th:if="${session.loggedInUser != null}">
+                <a th:href="@{/showWishlists}">Ønskelister</a>
+                <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+                <a th:href="@{/profile}">Profil</a>
+            </div>
         </div>
 
     </div>

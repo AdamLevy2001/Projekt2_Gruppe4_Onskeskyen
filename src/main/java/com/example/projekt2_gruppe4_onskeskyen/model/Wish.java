@@ -14,8 +14,6 @@ public class Wish {
 
     int wishlistId;
 
-    public Wish() {}
-
     public Wish(int id, String name, String description, double price, String link, int wishlistId) {
         this.id = id;
         this.name = name;

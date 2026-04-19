@@ -14,14 +14,12 @@
 
         <div class="logo">
             <a th:href="@{/}">
-            <img th:src="@{/img/Logo.png}" alt="logo">
+                <img th:src="@{/img/Logo.png}" alt="logo">
             </a>
         </div>
 
         <div class="nav-links">
             <div th:if="${session.loggedInUser}">
-                <p th:text="'Logget ind som: ' + ${session.loggedInUser.name}"></p>
-
                 <a th:href="@{/showWishlists}">Ønskesedler</a>
                 <a th:href="@{/createWishlist}">Ny ønskeseddel</a>
                 <a th:href="@{/profile}">Min profil</a>
@@ -83,9 +81,11 @@
         </div>
 
         <div class="footer-links">
-            <a th:href="@{/showWishlists}">Ønskelister</a>
-            <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
-            <a th:href="@{/profile}">Profil</a>
+            <div th:if="${session.loggedInUser != null}">
+                <a th:href="@{/showWishlists}">Ønskelister</a>
+                <a th:href="@{/createWishlist}">Opret ønskeseddel</a>
+                <a th:href="@{/profile}">Profil</a>
+            </div>
         </div>
 
     </div>
